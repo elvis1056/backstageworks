@@ -260,6 +260,10 @@
       margin: 0
     }
   }
+  .main-sidebar {
+    transform: translate(-230px, 0);
+    padding-top: 100px;
+  }
   .sidebar-collapse {
     .main-sidebar {
       transform: translate(0, 0);

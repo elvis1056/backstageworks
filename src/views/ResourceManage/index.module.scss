@@ -1,0 +1,32 @@
+.ResourceManage__container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+
+  .ResourceManage__TreeView {
+    width: calc(20% - 20px);
+    overflow: auto;
+    max-width: calc(20% - 20px);
+    margin-right: 20px;
+    background: #fff;
+    position: relative;
+    padding: 4px 0;
+    border-radius: 4px;
+  }
+
+  .ResourceManage__Block {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+
+    .ResourceManage__SubResource {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+      overflow: hidden;
+      flex: 1;
+      background: #fff;
+      border-radius: 4px;
+    }
+  }
+}

@@ -26,7 +26,7 @@ const Entry = lazy(async () => await import(/* webpackChunkName: 'Entry' */ './v
 // const GlusterFS = lazy(async() => await import(/* webpackChunkName: 'GlusterFS' */ './views/GlusterFS'))
 // const LoginLog = lazy(async() => await import(/* webpackChunkName: 'LoginLog' */ './views/LoginLog'))
 // const ClusterReport = lazy(async() => await import(/* webpackChunkName: 'ClusterReport' */ './views/ClusterReport'))
-// const ResourceManage = lazy(async() => await import(/* webpackChunkName: 'ResourceManage' */ './views/ResourceManage'))
+const ResourceManage = lazy(async() => await import(/* webpackChunkName: 'ResourceManage' */ './views/ResourceManage'))
 // const DataLabeling = lazy(async() => await import(/* webpackChunkName: 'DataLabeling' */ './views/DataLebeling'))
 // const GroupManage = lazy(async() => await import(/* webpackChunkName: 'GroupManage' */ './views/GroupManage'))
 // const Calendar = lazy(async() => await import(/* webpackChunkName: 'Calendar' */ './views/Calendar'))
@@ -65,6 +65,12 @@ const Routes = () => {
           exact
           layout={MainLayout}
           path="/entry"
+        />
+        <RouteWithLayout
+          auth
+          component={ResourceManage}
+          layout={MainLayout}
+          path="/resource-manage"
         />
         {/* <RouteWithLayout
           component={SignIn}
