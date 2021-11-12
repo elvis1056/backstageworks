@@ -10,7 +10,7 @@ import './App.css';
 
 // ^ Material-ui Components(Functions)
 import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import materialUIpalette from '../src/theme/palette';
 
 // ^ Plugins
@@ -25,7 +25,7 @@ const browserHistory = createBrowserHistory();
 function App() {
 
   // 創建自定義的設定
-  const theme = createMuiTheme({
+  const theme = createTheme({
     // ! 非原生寫法的 breakpoints 寫法，定義一個數值可以取用
     bp: {
       laptop: 1024,

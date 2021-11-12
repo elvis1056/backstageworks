@@ -2,14 +2,13 @@ import React, { Suspense, lazy } from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
 import { RouteWithLayout, Loading } from './components';
-import { Minimal as MinimalLayout } from './layouts';
-// import { Minimal as MinimalLayout, Main as MainLayout } from './layouts';
+import { Minimal as MinimalLayout, Main as MainLayout } from './layouts';
 
 const SignIn = lazy(async() => await import(/* webpackChunkName: "SignIn" */ './views/SignIn'))
 const SignUp = lazy(async () => await import(/* webpackChunkName: 'SignUp' */ './views/SignUp'))
 const ForgetPassword = lazy(async() => await import(/* webpackChunkName: "ForgetPassword" */ './views/ForgetPassword'))
 // const ChangePassword = lazy(async() => await import(/* webpackChunkName: "ChangePassword" */ './views/ChangePassword'))
-// const Entry = lazy(async () => await import(/* webpackChunkName: 'Entry' */ './views/Entry'))
+const Entry = lazy(async () => await import(/* webpackChunkName: 'Entry' */ './views/Entry'))
 // const Hardware = lazy(async () => await import(/* webpackChunkName: 'Hardware' */ './views/Hardware'))
 // const JobSubmit = lazy(async() => await import(/* webpackChunkName: 'JobSubmit' */ './views/JobSubmit'))
 // const JobDetail = lazy(async() => await import(/* webpackChunkName: 'JobDetail' */ './views/JobDetail'))
@@ -60,13 +59,13 @@ const Routes = () => {
           layout={MinimalLayout}
           path="/forget-password"
         />
-        {/* <RouteWithLayout
+        <RouteWithLayout
           auth
           component={Entry}
           exact
           layout={MainLayout}
           path="/entry"
-        /> */}
+        />
         {/* <RouteWithLayout
           component={SignIn}
           exact

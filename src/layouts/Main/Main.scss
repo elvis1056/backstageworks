@@ -16,6 +16,8 @@
 .main-header {
   position: absolute;
   width: 100%;
+  max-height: 100px;
+  z-index: 1030;
   .logo {
     transition: width .3s ease-in-out;
     display: block;
@@ -30,14 +32,40 @@
     overflow: hidden;
     color: $theme-white;
     border-bottom: 0 solid transparent;
+    img {
+      padding: 4px;
+      object-fit: contain;
+      margin: 0 auto;
+    }
+    .logo-mini {
+      display: none;
+      img {
+        max-width: 50px;
+        max-height: 50px;
+      }
+    }
     .logo-lg {
+      display: block;
       img {
         width: 110px;
         height: auto;
       }
     }
   }
+  .sidebar-toggle {
+    float: left;
+    background-color: transparent;
+    background-image: none;
+    padding: 15px;
+    font-family: fontAwesome;
+  }
   .navbar {
+    transition: margin-left .3s ease-in-out;
+    margin-bottom: 0;
+    margin-left: 230px;
+    border: none;
+    min-height: 50px;
+    border-radius: 0;
     .sidebar-toggle {
       color: #fff;
       &::before {
@@ -45,6 +73,7 @@
       }
     }
     .navbar-custom-menu {
+      float: right;
       .navbar-nav {
         .dropdown {
           a {
@@ -166,10 +195,37 @@
 
 .content-wrapper {
   height: 100%;
+  margin-left: 230px;
   padding-top: 50px;
   transition: padding, .3s,
               margin .3s;
+  min-height: calc(100vh - 101px);
+  background-color: #ecf0f5;
+  z-index: 800;
 }
+
+@media (max-width: 991px) {
+  .main-header .navbar-custom-menu a {
+    color: inherit;
+    background: transparent;
+  }
+  .navbar-custom-menu .navbar-nav {
+    margin: 0;
+    float: left;
+  }
+  .navbar-custom-menu .navbar-nav>li {
+    float: left;
+  }
+  .navbar-custom-menu>.navbar-nav>li {
+    position: static;
+  }
+  .navbar-custom-menu .navbar-nav>li>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    line-height: 20px;
+  }
+}
+
 
 @media (min-width: 768px) {
   .sidebar-collapse {
@@ -188,6 +244,7 @@
       }
     }
     .content-wrapper {
+      margin-left: 0;
       padding-left: 60px;
     }
   }
@@ -199,14 +256,21 @@
       width: 100%;
       float: none;
     }
+    .navbar {
+      margin: 0
+    }
   }
   .sidebar-collapse {
     .main-sidebar {
       transform: translate(0, 0);
     }
+    .content-wrapper {
+      margin-left: 0;
+    }
   }
   .content-wrapper {
     padding-top: 100px;
+    margin-left: 0;
   }
 }
 

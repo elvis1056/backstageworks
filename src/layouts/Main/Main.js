@@ -2,14 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 // # API
 import {
-  getCurrentUserInfo,
-  getCustomizedSystemParam,
-  getUserNotices,
-  getXdfsIsEnabled,
-  // # 取得資源對照表
-  getHivedResourceUnit,
-  // # 取得可以使用的 Vg 資源對照表
-  getCanUseVirtualGroups
+// getCurrentUserInfo
+// getCustomizedSystemParam,
+// getUserNotices,
+// getXdfsIsEnabled
+// # 取得資源對照表
+// getHivedResourceUnit
+// # 取得可以使用的 Vg 資源對照表
+// getCanUseVirtualGroups
 } from 'utils/api';
 
 // ? context
@@ -65,12 +65,13 @@ const Main = ({ children }) => {
    * @param {string} user -- User name
    * @description 取得使用者資料
   */
-  const getUserInfo = async (user) => {
+  const getUserInfo = async () => {
     // user做預設
-    user = user || defaultUser
+    // user = user || defaultUser
 
     try {
-      const userInfoReq = await getCurrentUserInfo(user)
+      // const userInfoReq = await getCurrentUserInfo(user)
+      const userInfoReq = { 'username':'admin', 'userCode':null, 'name':null, 'email':null, 'phone':null, 'description':null, 'roles':['admin'], 'privileges':['ADMIN'], 'state':1, 'leaderGroups':['system', 'qwe'], 'userGroups':['system'], 'virtualGroups':['nick', 'nick2', 'test', 'rtx'], 'nfsList':['ass', 'xfsquota3', 'nfs2', 'qwer', 'sdsdsd', 'admin', 'elvis', 'xfsquaota', 'dododo'], 'glusterfsList':['qqqqqqq', 'glusterfs'], 'xdfsList':['xdfs', 'admin'], 'lastSigninDate':1636696393988 }
 
       if(userInfoReq && !isEmpty(userInfoReq)){
         const thisUserInfo = {
@@ -91,7 +92,8 @@ const Main = ({ children }) => {
   */
   const getSystemSetting = async () => {
     try {
-      const systemSettingReq = await getCustomizedSystemParam()
+      // const systemSettingReq = await getCustomizedSystemParam()
+      const systemSettingReq = []
       if(systemSettingReq && !isEmpty(systemSettingReq)){
         setSystemSetting(systemSettingReq);
 
@@ -108,10 +110,11 @@ const Main = ({ children }) => {
    * @description 取得個人通知列表
   */
   const getNotices = async () => {
-    const { username } = userInfo;
+    // const { username } = userInfo;
 
     try {
-      const list = await getUserNotices(username)
+      // const list = await getUserNotices(username)
+      const list = []
 
       if(list && !isEmpty(list)){
         setNoticeList(list);
@@ -128,10 +131,11 @@ const Main = ({ children }) => {
    * @param {string} username -- 使用者名稱
    * @description 取得可以使用的集群列表
   */
-  const getCanUseVgList = async (username) => {
-
+  const getCanUseVgList = async () => {
+    // username
     try {
-      const list = await getCanUseVirtualGroups(username)
+      // const list = await getCanUseVirtualGroups(username)
+      const list = []
 
       if(list && !isEmpty(list)){
         // console.log('Main getCanUseVgList list', list)
@@ -258,7 +262,8 @@ const Main = ({ children }) => {
 
   const getXdfs = async () => {
     try {
-      const { isEnabled: isXdfsEnabled } = await getXdfsIsEnabled();
+      // const { isEnabled: isXdfsEnabled } = await getXdfsIsEnabled();
+      const isXdfsEnabled = false;
 
       setIsXdfsEnabled(isXdfsEnabled);
     } catch (err) {
@@ -269,7 +274,8 @@ const Main = ({ children }) => {
   const getResourceUnit = async () => {
     try {
       // 取得資源對照表
-      const resourceUnitReq = await getHivedResourceUnit();
+      // const resourceUnitReq = await getHivedResourceUnit();
+      const resourceUnitReq = {}
 
       if(resourceUnitReq && !isEmpty(resourceUnitReq)){
         setResourceUnit(resourceUnitReq);

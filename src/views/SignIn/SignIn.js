@@ -136,6 +136,7 @@ const Home = () => {
       setLock(false);
       return;
     }
+    history.push('/entry')
     // userLogin(userInfo)
     //   .then(res => {
     //     cookies.set('user', userInfo.username, { 'expires': 7 });

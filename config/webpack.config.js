@@ -737,6 +737,11 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
+        new webpack.ProvidePlugin({
+          jQuery: 'jquery',
+          $: 'jquery',
+          jquery: 'jquery'
+        }),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell webpack to provide empty mocks for them so importing them works.
