@@ -133,16 +133,17 @@
     "xterm-addon-fit": "^0.4.0"
   },
   "scripts": {
+    "lint": "eslint --ignore-path .eslintignore . --max-warnings=0",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app"
-      // "react-app/jest"
-    ]
+    "extends": "react-app"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",
