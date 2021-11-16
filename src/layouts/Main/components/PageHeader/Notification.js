@@ -75,7 +75,8 @@ const Notification = ({ isNotifycationDropdownOpen, userInfo, setHasNoRead, setL
 
   function socketConnect() {
     if (!cookies.get('token')) return
-
+    const ban = true;
+    if (ban) return
 
 
     const client = new Client({

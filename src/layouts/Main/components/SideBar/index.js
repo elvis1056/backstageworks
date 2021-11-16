@@ -114,15 +114,15 @@ const SideBar = ({ userInfo }) => {
           iconName: 'fa-tasks',
           href: '/job-detail',
           isShow: true
+        },
+        {
+          key: 'Schedule',
+          title: `${t('sideBar.schedule-arrangement')}`,
+          className: 'model-training--schedule',
+          iconName: 'far fa-calendar-check',
+          href: '/schedule',
+          isShow: true
         }
-        // {
-        //   key: 'Schedule',
-        //   title: `${t('sideBar.schedule-arrangement')}`,
-        //   className: 'model-training--schedule',
-        //   iconName: 'far fa-calendar-check',
-        //   href: '/schedule',
-        //   isShow: true
-        // }
       ]
     }
     // {

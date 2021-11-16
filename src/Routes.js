@@ -15,12 +15,12 @@ const Entry = lazy(async () => await import(/* webpackChunkName: 'Entry' */ './v
 // const LicenseList = lazy(async() => await  import(/* webpackChunkName: 'LicenseList' */ './views/LicenseList'))
 // const NFSDiskList = lazy(async() => await import(/* webpackChunkName: 'NFSDiskList' */ './views/NFSDiskList'))
 // const Repository = lazy(async() => await import(/* webpackChunkName: 'Repository' */ './views/Repository'))
-// const RoleList = lazy(async() => await import(/* webpackChunkName: 'RoleList' */ './views/RoleList'))
+const RoleList = lazy(async() => await import(/* webpackChunkName: 'RoleList' */ './views/RoleList'))
 // const FsItemList = lazy(async() => await import(/* webpackChunkName: 'FsItemList' */ './views/FsItemList'))
 // const Todo = lazy(async() => await import(/* webpackChunkName: 'Todo' */ './views/Todo'))
 // const Term = lazy(async() => await import(/* webpackChunkName: 'Todo' */ './views/Term'))
 // const UserInfo = lazy(async() => await import(/* webpackChunkName: 'UserInfo' */ './views/UserInfo'))
-// const UserManage = lazy(async() => await import(/* webpackChunkName: 'UserManage' */ './views/UserManage'))
+const UserManage = lazy(async() => await import(/* webpackChunkName: 'UserManage' */ './views/UserManage'))
 // const VirtualGroup = lazy(async() => await import(/* webpackChunkName: 'VirtualGroup' */ './views/VirtualGroup'))
 // const SystemSetting = lazy(async() => await import(/* webpackChunkName: 'SystemSetting' */ './views/SystemSetting'))
 // const GlusterFS = lazy(async() => await import(/* webpackChunkName: 'GlusterFS' */ './views/GlusterFS'))
@@ -35,7 +35,7 @@ const ResourceManage = lazy(async() => await import(/* webpackChunkName: 'Resour
 // const ManageTemplate = lazy(async() => await import(/* webpackChunkName: 'ManageTemplate' */ './views/ManageTemplate'))
 // const VersionLog = lazy(async() => await import(/* webpackChunkName: 'VersionLog' */ './views/VersionLog'))
 // const Xdfs = lazy(async() => await import(/* webpackChunkName: 'Xdfs' */ './views/Xdfs'))
-// const NotFound = lazy(async() => await import(/* webpackChunkName: 'NotFound' */ './views/NotFound'))
+const NotFound = lazy(async() => await import(/* webpackChunkName: 'NotFound' */ './views/NotFound'))
 
 const Routes = () => {
   return (
@@ -71,6 +71,26 @@ const Routes = () => {
           component={ResourceManage}
           layout={MainLayout}
           path="/resource-manage"
+        />
+        <RouteWithLayout
+          auth
+          component={UserManage}
+          exact
+          layout={MainLayout}
+          path="/user-manage"
+        />
+        <RouteWithLayout
+          auth
+          component={RoleList}
+          exact
+          layout={MainLayout}
+          path="/role-list"
+        />
+        <RouteWithLayout
+          component={NotFound}
+          exact
+          layout={MinimalLayout}
+          path="/not-found"
         />
         {/* <RouteWithLayout
           component={SignIn}
