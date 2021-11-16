@@ -27,7 +27,7 @@ import EntryContext from '../../EntryContext';
 
 // ^ plugins
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 
@@ -200,8 +200,9 @@ export default function QuickStart() {
         })
       }
 
-    } catch (err) {
-      toast.error('Error:' + (err.data.message ? err.data.message : err.data.error));
+    } 
+    catch (err) {
+      // toast.error('Error:' + (err.data.message ? err.data.message : err.data.error));
     }
   }
 
