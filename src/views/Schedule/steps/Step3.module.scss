@@ -1,0 +1,45 @@
+.container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 480px;
+  .vgStateContainer {
+    display: flex;
+  }
+}
+
+.header {
+  position: sticky;
+  top: -20px;
+  z-index: 2;
+  background-color: white;
+}
+
+.headerBorderBottom {
+  border-bottom: 1px solid #edebe9;
+}
+
+.errorColor {
+  color: #f44336;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+.width25 {
+  width: 25%;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.marginBottom10 {
+  margin-bottom: 10px;
+}

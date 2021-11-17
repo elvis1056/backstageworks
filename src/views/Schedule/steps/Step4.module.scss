@@ -1,0 +1,23 @@
+.container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 480px;
+  overflow-y: auto;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.paddingBottom72 {
+  padding-bottom: 72px;
+}
+
+.width100 {
+  width: 100%;
+}

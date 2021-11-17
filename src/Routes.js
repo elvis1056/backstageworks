@@ -30,7 +30,7 @@ const ResourceManage = lazy(async() => await import(/* webpackChunkName: 'Resour
 // const DataLabeling = lazy(async() => await import(/* webpackChunkName: 'DataLabeling' */ './views/DataLebeling'))
 // const GroupManage = lazy(async() => await import(/* webpackChunkName: 'GroupManage' */ './views/GroupManage'))
 // const Calendar = lazy(async() => await import(/* webpackChunkName: 'Calendar' */ './views/Calendar'))
-// const Schedule = lazy(async() => await import(/* webpackChunkName: 'Schedule' */ './views/Schedule'))
+const Schedule = lazy(async() => await import(/* webpackChunkName: 'Schedule' */ './views/Schedule'))
 // const ManageSchedule = lazy(async() => await import(/* webpackChunkName: 'ManageSchedule' */ './views/ManageSchedule'))
 // const ManageTemplate = lazy(async() => await import(/* webpackChunkName: 'ManageTemplate' */ './views/ManageTemplate'))
 // const VersionLog = lazy(async() => await import(/* webpackChunkName: 'VersionLog' */ './views/VersionLog'))
@@ -85,6 +85,12 @@ const Routes = () => {
           exact
           layout={MainLayout}
           path="/role-list"
+        />
+        <RouteWithLayout
+          auth
+          component={Schedule}
+          layout={MainLayout}
+          path="/schedule"
         />
         <RouteWithLayout
           component={NotFound}

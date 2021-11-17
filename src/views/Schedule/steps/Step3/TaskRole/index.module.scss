@@ -1,0 +1,73 @@
+.container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .content {
+    flex: 2;
+    overflow: auto;
+    margin-bottom: 20px;
+  }
+  .footer {
+    height: 72px;
+    background: #FFF
+  }
+}
+
+.formContent {
+  .row {
+    display: flex;
+    justify-content: space-between;
+  }
+  & > div:not(:first-child) {
+    margin-top: 20px;
+  }
+}
+
+.tabContainer {
+  display: flex;
+  align-items: center;
+  background: #FAF9F8;
+  overflow: auto;
+  .tabAdd {
+    flex: 2;
+    height: 100%;
+    padding-left: 10px;
+  }
+}
+
+.paddingBottom72 {
+  padding-bottom: 72px;
+}
+
+.marginTop10 {
+  margin-top: 10px;
+}
+
+.paddingLeftRight10 {
+  padding: 0 10px;
+}
+
+.width20 {
+  width: 20%;
+}
+
+.width25 {
+  width: 25%;
+}
+
+.width45 {
+  width: 45%;
+}
+
+.width50 {
+  width: 50%
+}
+
+.width75 {
+  width: 75%;
+}
+
+.width100 {
+  width: 100%;
+}

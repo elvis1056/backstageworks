@@ -1,0 +1,58 @@
+.container {
+  padding: 20px;
+  .title {
+    display: flex;
+    justify-content: flex-end;
+    .icon {
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
+  .wrapper {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    .row {
+      display: flex;
+      margin-bottom: 10px;
+      .row__title {
+        white-space: nowrap;
+        width: 60px;
+        margin-right: 30px;
+        text-align: right;
+        .row__title__state {
+          display: inline-block;
+          padding: 4px 8px;
+          font-size: 12px;
+        }
+        .row__title__state--denied {
+          background-color: #FFE4DD;
+        }
+        .row__title__state--verifying {
+          background-color: #FFF8EA;
+        }
+        .row__title__state--verified {
+          background-color: #D6F8C5;
+        }
+      }
+      .row__description {
+        width: 240px;
+      }
+      .row__name {
+        font-size: 18px;
+        font-weight: blod;
+      }
+      .schedule__container__block__info--state {
+        color: #FFA500;
+      }
+
+      .schedule__container__block__info--red {
+          color: red;
+      }
+
+      .schedule__container__block__info--green {
+          color: green;
+      }
+    }
+  }
+}

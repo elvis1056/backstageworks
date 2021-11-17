@@ -1,0 +1,38 @@
+.title {
+  display: flex;
+  justify-content: space-between;
+  .name {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .icons {
+    display: flex;
+  }
+}
+
+.form {
+  width: 450px;
+  .row {
+    display: flex;
+    .row__left {
+      width: 75%;
+      display: flex;
+      justify-content: space-between;
+    }
+    .row__right {
+      flex-grow: 1;
+      .row__right__block {
+        width: 100%;
+        margin-top: 35px;
+        padding-left: 15px;
+      }
+    }
+  }
+  .footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
