@@ -23,7 +23,7 @@ import React, { useEffect, useLayoutEffect, useRef } from 'react';
 const ReactMonacoEditor = React.lazy(() => import('react-monaco-editor'));
 
 import { monacoHack } from './monaco-hack.module.scss';
-import t from './tachyons.module.scss';
+// import t from './tachyons.module.scss';
 
 const MonacoEditor = ({ className, style, monacoProps, completionItems, schemas, monacoRef }) => {
   // monaco variables
@@ -84,21 +84,21 @@ const MonacoEditor = ({ className, style, monacoProps, completionItems, schemas,
     delete monacoProps.editorDidMount;
   }
 
-  let monacoClassName = null;
-  if (!isNil(monacoProps.className)) {
-    monacoClassName = monacoProps.className;
-    delete monacoProps.className;
-  }
+  // let monacoClassName = null;
+  // if (!isNil(monacoProps.className)) {
+  //   monacoClassName = monacoProps.className;
+  //   delete monacoProps.className;
+  // }
 
   return (
     <div
       className={c(monacoHack, className)}
-      style={style}
+      style={{ flexGrow: 1, minHeight: 0, borderRadius: 4, overflow: 'hidden', ...style }}
     >
       <React.Suspense fallback={<>Loading...</>}>
         <ReactMonacoEditor
         // default props
-          className={c(t.flexAuto, monacoClassName)}
+          // className={c(monacoClassName)}
           editorDidMount={(e, m) => {
           // save monaco context
             editor.current = e;

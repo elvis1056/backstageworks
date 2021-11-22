@@ -20,6 +20,11 @@ import { createBrowserHistory } from 'history';
 import './assets/scss/index.scss';
 import Routes from './Routes';
 
+import { loadTheme, initializeIcons } from 'office-ui-fabric-react';
+import theme from './theme';
+initializeIcons('/assets/font/');
+loadTheme(theme);
+
 const browserHistory = createBrowserHistory();
 
 function App() {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { mergeStyles } from 'office-ui-fabric-react';
 import { ChoiceGroup  } from 'components/BaseInput';
 import { useTranslation } from 'react-i18next';
-import { DefaultButton, PrimaryButton } from 'components/BaseButton';
+import { DefaultButton, PrimaryButton } from 'components/BaseFluentButton';
 import { JobTaskRole } from 'views/Schedule/components/models/job-task-role';
 import { DockerInfo } from 'views/Schedule/components/models/docker-info';
 import { Completion } from 'views/Schedule/components/completion';

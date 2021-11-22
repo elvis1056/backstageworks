@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { mergeStyles } from 'office-ui-fabric-react';
 import { Dropdown, TextField, ChoiceGroup } from 'components/BaseInput';
-import { DefaultButton, PrimaryButton } from 'components/BaseButton';
+import { DefaultButton, PrimaryButton } from 'components/BaseFluentButton';
 import { BaseDateTimePicker } from 'components/BaseDateTimePicker';
 import { SpinButton } from './Step1/Form/SpinButton';
 

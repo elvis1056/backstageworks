@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import BaseCalendar from 'components/BaseCalendar';
 import BreadCrumbs from 'components/BreadCrumbs';
-import { DefaultButton, PrimaryButton } from 'components/BaseButton';
+import { DefaultButton, PrimaryButton } from 'components/BaseFluentButton';
 import { Stack, StackItem, Callout, Dropdown, mergeStyles } from 'office-ui-fabric-react';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import ViewSchedule from './ViewSchedule';
@@ -16,6 +16,8 @@ import { getJobSchedule, getCanUseVirtualGroups } from 'utils/api';
 import { toast } from 'react-toastify';
 import { isEmpty } from 'lodash';
 import moment from 'moment';
+
+import { fakeCanUseVirtualGroup } from './fakeData';
 
 const Schedule = () => {
   const { userInfo } = useContext(GlobalContext);
@@ -85,6 +87,15 @@ const Schedule = () => {
   }
 
   const getCanUseVgList = () => {
+    const canSchedulableData = fakeCanUseVirtualGroup.filter(item => item.schedulable !== false)
+    setCanUseVg(canSchedulableData)
+    if (!isEmpty(canSchedulableData)) {
+      getData(canSchedulableData[0].name)
+      setSelectedVg(canSchedulableData[0].name)
+      if (!isEmpty(canSchedulableData[0].gpu)) {
+        setSelectedVgHasGpu(true)
+      }
+    }
     getCanUseVirtualGroups(userInfo.username)
       .then((res) => {
         const schedulableData = res.filter(item => item.schedulable !== false)
@@ -97,7 +108,7 @@ const Schedule = () => {
           }
         }
       })
-      .catch(err => toast.error('Error: ' + err.data ? err.data.message : err.message))
+      // .catch(err => toast.error('Error: ' + err.data ? err.data.message : err.message))
   }
 
   useEffect(() => {
@@ -134,7 +145,6 @@ const Schedule = () => {
         <div className={indexStyles.searchBlock}>
           <div className={indexStyles.searchBlock__left} >
             <DefaultButton
-              children={t('refresh')}
               className={mergeStyles({ marginRight: 10 })}
               disabled={isLoading}
               iconProps={{
@@ -143,6 +153,7 @@ const Schedule = () => {
               onClick={() => {
                 if (!isEmpty(selectedVg)) getData(selectedVg)
               }}
+              text={t('refresh')}
             />
             <Dropdown
               className={mergeStyles({ marginRight: 10 })}
@@ -166,7 +177,6 @@ const Schedule = () => {
               }}
             />
             <PrimaryButton
-              children={t('search')}
               disabled={isLoading}
               iconProps={{ iconName: 'Search' }}
               onClick={() => getData(selectedVg)}
@@ -181,6 +191,7 @@ const Schedule = () => {
                   }
                 }
               }}
+              text={t('search')}
             />
           </div>
           <div>

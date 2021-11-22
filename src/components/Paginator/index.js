@@ -98,7 +98,7 @@ export default function Paginator(props) {
       getPageButton(0),
       getPageButton(1),
       { key: 'page-ellipsis-left', disabled: true, text: '...', buttonStyles },
-      getPageButton(pageIndex - 1),
+      getPageButton(pageIndex - 1)
     );
   } else {
     for (let i = 0; i < pageIndex; i += 1) {
@@ -112,7 +112,7 @@ export default function Paginator(props) {
     farItems.push(
       getPageButton(pageIndex + 1),
       { key: 'page-ellipsis-right', disabled: true, text: '...', buttonStyles },
-      getPageButton(maxPageIndex - 1),
+      getPageButton(maxPageIndex - 1)
     );
   } else {
     for (let i = pageIndex + 1; i < maxPageIndex; i += 1) {

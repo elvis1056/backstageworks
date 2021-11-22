@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { mergeStyles } from 'office-ui-fabric-react';
-import { DefaultButton, PrimaryButton } from 'components/BaseButton';
+import { DefaultButton, PrimaryButton } from 'components/BaseFluentButton';
 import TaskRole from './Step3/TaskRole';
 import { validate } from 'joi-browser';
 import { TaskRolesSechma } from '../model/JobTaskRoleSchema';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mergeStyles } from 'office-ui-fabric-react';
-import { DefaultButton, PrimaryButton } from 'components/BaseButton';
+import { DefaultButton, PrimaryButton } from 'components/BaseFluentButton';
 import StorageSetting from './Step4/StorageSetting';
 import Parameter from './Step4/Parameter';
 import { useTranslation } from 'react-i18next';

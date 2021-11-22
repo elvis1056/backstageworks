@@ -32,7 +32,7 @@ const ResourceManage = lazy(async() => await import(/* webpackChunkName: 'Resour
 // const Calendar = lazy(async() => await import(/* webpackChunkName: 'Calendar' */ './views/Calendar'))
 const Schedule = lazy(async() => await import(/* webpackChunkName: 'Schedule' */ './views/Schedule'))
 // const ManageSchedule = lazy(async() => await import(/* webpackChunkName: 'ManageSchedule' */ './views/ManageSchedule'))
-// const ManageTemplate = lazy(async() => await import(/* webpackChunkName: 'ManageTemplate' */ './views/ManageTemplate'))
+const ManageTemplate = lazy(async() => await import(/* webpackChunkName: 'ManageTemplate' */ './views/ManageTemplate'))
 // const VersionLog = lazy(async() => await import(/* webpackChunkName: 'VersionLog' */ './views/VersionLog'))
 // const Xdfs = lazy(async() => await import(/* webpackChunkName: 'Xdfs' */ './views/Xdfs'))
 const NotFound = lazy(async() => await import(/* webpackChunkName: 'NotFound' */ './views/NotFound'))
@@ -97,6 +97,12 @@ const Routes = () => {
           exact
           layout={MinimalLayout}
           path="/not-found"
+        />
+        <RouteWithLayout
+          auth
+          component={ManageTemplate}
+          layout={MainLayout}
+          path="/template-manage"
         />
         {/* <RouteWithLayout
           component={SignIn}

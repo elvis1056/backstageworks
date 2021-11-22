@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { mergeStyles } from 'office-ui-fabric-react';
-import { DefaultButton, PrimaryButton } from 'components/BaseButton';
+import { DefaultButton, PrimaryButton } from 'components/BaseFluentButton';
 import PreviewModal from './Step5/PreviewModal';
 import { JobFinalData } from '../model/JobFinalData';
 import Context from '../Context';
