@@ -25,7 +25,7 @@ const UserManage = lazy(async() => await import(/* webpackChunkName: 'UserManage
 // const SystemSetting = lazy(async() => await import(/* webpackChunkName: 'SystemSetting' */ './views/SystemSetting'))
 // const GlusterFS = lazy(async() => await import(/* webpackChunkName: 'GlusterFS' */ './views/GlusterFS'))
 // const LoginLog = lazy(async() => await import(/* webpackChunkName: 'LoginLog' */ './views/LoginLog'))
-// const ClusterReport = lazy(async() => await import(/* webpackChunkName: 'ClusterReport' */ './views/ClusterReport'))
+const ClusterReport = lazy(async() => await import(/* webpackChunkName: 'ClusterReport' */ './views/ClusterReport'))
 const ResourceManage = lazy(async() => await import(/* webpackChunkName: 'ResourceManage' */ './views/ResourceManage'))
 // const DataLabeling = lazy(async() => await import(/* webpackChunkName: 'DataLabeling' */ './views/DataLebeling'))
 // const GroupManage = lazy(async() => await import(/* webpackChunkName: 'GroupManage' */ './views/GroupManage'))
@@ -103,6 +103,12 @@ const Routes = () => {
           component={ManageTemplate}
           layout={MainLayout}
           path="/template-manage"
+        />
+        <RouteWithLayout
+          auth
+          component={ClusterReport}
+          layout={MainLayout}
+          path="/cluster-report"
         />
         {/* <RouteWithLayout
           component={SignIn}
