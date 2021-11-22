@@ -16,7 +16,7 @@ const Entry = lazy(async () => await import(/* webpackChunkName: 'Entry' */ './v
 // const NFSDiskList = lazy(async() => await import(/* webpackChunkName: 'NFSDiskList' */ './views/NFSDiskList'))
 // const Repository = lazy(async() => await import(/* webpackChunkName: 'Repository' */ './views/Repository'))
 const RoleList = lazy(async() => await import(/* webpackChunkName: 'RoleList' */ './views/RoleList'))
-// const FsItemList = lazy(async() => await import(/* webpackChunkName: 'FsItemList' */ './views/FsItemList'))
+const FsItemList = lazy(async() => await import(/* webpackChunkName: 'FsItemList' */ './views/FsItemList'))
 // const Todo = lazy(async() => await import(/* webpackChunkName: 'Todo' */ './views/Todo'))
 // const Term = lazy(async() => await import(/* webpackChunkName: 'Todo' */ './views/Term'))
 // const UserInfo = lazy(async() => await import(/* webpackChunkName: 'UserInfo' */ './views/UserInfo'))
@@ -28,7 +28,7 @@ const UserManage = lazy(async() => await import(/* webpackChunkName: 'UserManage
 const ClusterReport = lazy(async() => await import(/* webpackChunkName: 'ClusterReport' */ './views/ClusterReport'))
 const ResourceManage = lazy(async() => await import(/* webpackChunkName: 'ResourceManage' */ './views/ResourceManage'))
 // const DataLabeling = lazy(async() => await import(/* webpackChunkName: 'DataLabeling' */ './views/DataLebeling'))
-// const GroupManage = lazy(async() => await import(/* webpackChunkName: 'GroupManage' */ './views/GroupManage'))
+const GroupManage = lazy(async() => await import(/* webpackChunkName: 'GroupManage' */ './views/GroupManage'))
 // const Calendar = lazy(async() => await import(/* webpackChunkName: 'Calendar' */ './views/Calendar'))
 const Schedule = lazy(async() => await import(/* webpackChunkName: 'Schedule' */ './views/Schedule'))
 // const ManageSchedule = lazy(async() => await import(/* webpackChunkName: 'ManageSchedule' */ './views/ManageSchedule'))
@@ -88,9 +88,33 @@ const Routes = () => {
         />
         <RouteWithLayout
           auth
+          component={FsItemList}
+          layout={MainLayout}
+          path="/fs-item-list"
+        />
+        <RouteWithLayout
+          auth
+          component={FsItemList}
+          layout={MainLayout}
+          path="/glusterfs-item-list"
+        />
+        <RouteWithLayout
+          auth
+          component={FsItemList}
+          layout={MainLayout}
+          path="/xdfs-item-list"
+        />
+        <RouteWithLayout
+          auth
           component={Schedule}
           layout={MainLayout}
           path="/schedule"
+        />
+        <RouteWithLayout
+          auth
+          component={GroupManage}
+          layout={MainLayout}
+          path="/group-manage"
         />
         <RouteWithLayout
           component={NotFound}
