@@ -41,6 +41,8 @@ import { generateNewFileName } from './utils'
 
 import style from './index.module.scss';
 
+import { fakeFileList } from './fakeData';
+
 const canUnzip = path => {
   return (
     path.endsWith('.tar.gz') ||
@@ -180,6 +182,11 @@ const DetailPage = ({ match }) => {
     const getFilePath = isXdfsEnabled
       ? getXdfsFilePath
       : isNFS ? getNfsFilePath : getGlusterfsFilePath
+
+    setFileList(fakeFileList.children)
+    if (pathTemp) {
+      setPathTemp(null);
+    }
 
     getFilePath(name, filePath)
       .then(data => {
@@ -416,6 +423,7 @@ const DetailPage = ({ match }) => {
                     href={null}
                     onClick={handleClick}
                     style={buttonStyle}
+                    to={'/fs-item-list'}
                   >
                     {showIcon(type)}
                     {name}
