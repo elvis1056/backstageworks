@@ -5,7 +5,8 @@ import { JobBasicInfo } from './model/JobBasicInfo';
 import { JobTaskRole } from './model/JobTaskRole';
 import { JobTemplate } from './model/JobTemplate';
 import TaskRole from './components/TaskRole';
-import { getCanUseVirtualGroups, getUserNfs, getUsersGlusterfs, getUsersXdfs } from 'utils/api';
+import { getUserNfs, getUsersGlusterfs, getUsersXdfs } from 'utils/api';
+// import { getCanUseVirtualGroups, getUserNfs, getUsersGlusterfs, getUsersXdfs } from 'utils/api';
 import GlobalContext from 'layouts/Main/GlobalContext';
 import ParentContext from '../../Context';
 import Loading from 'components/Loading'
@@ -18,6 +19,8 @@ import Footer from './components/Footer';
 import { isEmpty } from 'lodash';
 
 import indexStyle from './index.module.scss';
+
+import { fakeNfsInfo, fakeGlusterFsInfo, fakeCanUseVg } from '../../fakeData';
 
 const index = () => {
   const { userInfo, isXdfsEnabled, resourceUnit: resourceUnitObject, getResourceUnitCount } = useContext(GlobalContext);
@@ -83,21 +86,33 @@ const index = () => {
 
   useEffect(() => {
     if (isEmpty(userInfo)) return;
-    getCanUseVirtualGroups(currentUserName)
-      .then(vg => {
-        setVgInfos(vg.reduce((res, info) => {
-          res[info.name] = info;
-          return res;
-        }, {}))
-        setVgNames(vg.map(v => v.name))
-      })
+    const close = true
+    setVgInfos(fakeCanUseVg.reduce((res, info) => {
+      res[info.name] = info;
+      return res
+    }, {}))
+    setVgNames(fakeCanUseVg.map(v => v.name))
+    // getCanUseVirtualGroups(currentUserName)
+    //   .then(vg => {
+    //     setVgInfos(vg.reduce((res, info) => {
+    //       res[info.name] = info;
+    //       return res;
+    //     }, {}))
+    //     setVgNames(vg.map(v => v.name))
+    //   })
 
     if (isXdfsEnabled) {
+      setXdfsInfo([])
+      if (close) return
       getUsersXdfs(currentUserName)
         .then(xdfs => {
           setXdfsInfo(xdfs.map(x => x.name))
         })
     } else {
+      setNfsInfo(fakeNfsInfo.map(n => n.name))
+      setGlusterfsInfo(fakeGlusterFsInfo.map(g => g.name))
+      if (close) return;
+
       getUserNfs(currentUserName)
         .then(nfs => {
           setNfsInfo(nfs.map(n => n.name))

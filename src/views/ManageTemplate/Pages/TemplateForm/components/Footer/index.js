@@ -271,6 +271,10 @@ const Footer = () => {
 
   const onSubmit = () => {
     setIsLoading(true);
+    toast.success(`${t('add')}${t('enSpace')}${t('success')}`)
+    setIsLoading(false);
+    const close = true;
+    if (close) return;
     if (isEditMode) {
       putJobTemplateJobConfig({ id: editId, data: transformFormat(formData, true) })
         .then(() => {

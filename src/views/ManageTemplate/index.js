@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import commonStyle from 'common/commonStyles';
 import { SelectSkuResource, KeyValueListMui, PortList } from './Pages/styles';
 
-import { fakeTemplate } from './fakeData';
+import { fakeTemplate, fakeUserList, fakeCanUseVg } from './fakeData';
 
 const useStyles = makeStyles((theme) => ({
   ...commonStyle(theme),
@@ -35,8 +35,10 @@ const ManageTemplate = () => {
 
   const getData = useCallback(() => {
     const hasAdminPrivileges = userInfo.admin === 'true' ? true : false;
-    setIsLoading(true);
+    // setIsLoading(true);
     setTemplateList(fakeTemplate)
+    const close = true;
+    if (close) return
     const getTemList = hasAdminPrivileges ? getJobTemplate() : getCanReadJobTemplate(userInfo.username);
     getTemList
       .then((template) => setTemplateList(template))
@@ -45,6 +47,9 @@ const ManageTemplate = () => {
   }, [userInfo])
 
   const getUser = useCallback(() => {
+    setUserList(fakeUserList.map(item => item.username))
+    const close = true;
+    if (close) return;
     getUserList()
       .then(jsonData => setUserList(jsonData.map(item => item.username)))
       .catch(err => toast.error(err.data ? err.data.message : err.toString()));
@@ -62,6 +67,12 @@ const ManageTemplate = () => {
   }, [userInfo])
 
   useEffect(() => {
+    setVgInfos(fakeCanUseVg.reduce((res, info) => {
+      res[info.name] = info;
+      return res
+    }, {}))
+    const close = true;
+    if (close) return;
     getCanUseVirtualGroups(currentUserName)
       .then(vg => {
         setVgInfos(vg.reduce((res, info) => {

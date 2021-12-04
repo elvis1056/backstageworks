@@ -74,6 +74,8 @@ const DockerInfo = ({ data, onChange, hint }) => {
   }, [selectedKey])
 
   useEffect(() => {
+    const close = true;
+    if (close) return;
     getHaborRepoInfo()
       .then(res => {
         setHarborHost(res.host);
