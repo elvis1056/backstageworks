@@ -55,6 +55,8 @@ const ResourceManage = () => {
     setTreeData([fakeTreeData])
     setResourceUnits(fakeResourceUnits)
     setActiveSystemData(findSelectedData([fakeTreeData]))
+    const close = true;
+    if (close) return
     Promise.all([getResource(name), getHivedResourceUnit()])
       .then(([res, resourceUnits]) => {
         setIsLoading(false)
@@ -202,6 +204,8 @@ const ResourceManage = () => {
       if (!isEmpty(data)) {
         setActiveSystemData(data)
       }
+      const close = true;
+      if (close) return
       getVgData(selectedItem)
     }
   }, [selectedItem, treeData])
