@@ -134,6 +134,8 @@ const RoleList = () => {
     setIsLoading(true);
     setRolePrivileges(fakePrivilege)
     setRoleList(fakeRoles)
+    const close = true;
+    if (close) return
     Promise.all([getPrivilege(), getRole()])
       .then(([privilege, role]) => {
         setRolePrivileges(privilege);
