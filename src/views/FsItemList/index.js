@@ -28,12 +28,14 @@ const FsItemList = ({ location }) => {
   const [pathTemp, setPathTemp] = useState(null); // 存目錄名稱 返回時跳到該檔案的頁數
 
   const getFsList = useCallback(async() => {
-    setIsLoading(true);
+    // setIsLoading(true);
     setFsList(
       isXdfsEnabled
         ? []
         : isNFS ? fakeNfsList : fakeGlusterFsList
     );
+    const close = true;
+    if (close) return;
     try {
       const getData = isXdfsEnabled
         ? getUsersXdfs
