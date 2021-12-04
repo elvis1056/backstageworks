@@ -32,6 +32,8 @@ import { isEmpty, find, isNull } from 'lodash';
 import { ToastContainer, toast } from 'react-toastify';
 import cookies from 'js-cookie';
 
+import { fakeResourceUnit } from './fakeData';
+
 /**
  * @author elvis
  * @level layouts/Main
@@ -276,6 +278,7 @@ const Main = ({ children }) => {
       // 取得資源對照表
       // const resourceUnitReq = await getHivedResourceUnit();
       const resourceUnitReq = {}
+      setResourceUnit(fakeResourceUnit)
 
       if(resourceUnitReq && !isEmpty(resourceUnitReq)){
         setResourceUnit(resourceUnitReq);
