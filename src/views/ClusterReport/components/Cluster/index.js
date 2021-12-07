@@ -34,6 +34,9 @@ import { toast } from 'react-toastify';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 
+import { fakeVgData, fakeResource, fakeResourceUnit } from './fakeData';
+import { fakeCpu, fakeMemoryUsed, fakeMemoryTotal, fakeMemoryBuffer, fakeGpu, fakeGpuMemory, fakeNetworkReceive, fakeNetworkTransmit, fakeDiskRead, fakeDiskWritten } from './fakePrometheus';
+
 /**
  * @author elvis
  * @level views/ClusterReport/Cluster
@@ -59,6 +62,13 @@ const ClusterTab = ({ duration }) => {
 
   // - methods
   const getVgInfo = (param = 'system') => {
+
+    setVgInfo(computeVgOverviewData(fakeVgData, fakeResource, fakeResourceUnit, t))
+    setVgRawData(computeVgOverviewDataForExportCsv(fakeVgData, fakeResourceUnit))
+
+    const close = true;
+    if (close) return;
+
     Promise.all([getVg(), getHivedResourceUnit(), getResource(param)])
       .then(([vgData, resourceUnits, resource]) => {
         setVgInfo(computeVgOverviewData(vgData, resource, resourceUnits, t))
@@ -71,6 +81,23 @@ const ClusterTab = ({ duration }) => {
 
   const getUseRate = useCallback(() => {
     const query = computeDayRange(cycle);
+
+    const cpu = !isEmpty(fakeCpu.data.result[0]) ? fakeCpu.data.result[0].values.map(value => value.map(parseNormalFormat)) : []
+    const memoryTotal = !isEmpty(fakeMemoryTotal.data.result[0]) ? fakeMemoryTotal.data.result[0].values.map(value => value.map(parseGBFormat)) : []
+    const memoryUsed = !isEmpty(fakeMemoryUsed.data.result[0]) ? fakeMemoryUsed.data.result[0].values.map(value => value.map(parseGBFormat)) : []
+    const memoryBuffer = !isEmpty(fakeMemoryBuffer.data.result[0]) ? fakeMemoryBuffer.data.result[0].values.map(value => value.map(parseGBFormat)) : []
+    const gpu = !isEmpty(fakeGpu.data.result[0]) ? fakeGpu.data.result[0].values.map(value => value.map(parseNormalFormat)) : []
+    const gpuMemory = !isEmpty(fakeGpuMemory.data.result[0]) ? fakeGpuMemory.data.result[0].values.map(value => value.map(parseNormalFormat)) : []
+    const networkReceive = !isEmpty(fakeNetworkReceive.data.result[0]) ? fakeNetworkReceive.data.result[0].values.map(value => value.map(parseKBFormat)) : []
+    const networkTransmit = !isEmpty(fakeNetworkTransmit.data.result[0]) ? fakeNetworkTransmit.data.result[0].values.map(value => value.map(parseKBFormat)) : []
+    const diskRead = !isEmpty(fakeDiskRead.data.result[0]) ? fakeDiskRead.data.result[0].values.map(value => value.map(parseKBFormat)) : []
+    const diskWritten = !isEmpty(fakeDiskWritten.data.result[0]) ? fakeDiskWritten.data.result[0].values.map(value => value.map(parseKBFormat)) : []
+
+    setUseRate({ cpu, memoryTotal, memoryUsed, memoryBuffer, gpu, gpuMemory, networkReceive, networkTransmit, diskRead, diskWritten })
+
+    const close = true;
+    if (close) return
+
     Promise.all([
       getHardwareInfoRange({
         query: '100 - avg (irate(node_cpu_seconds_total{mode="idle"}[300s])) * 100',
