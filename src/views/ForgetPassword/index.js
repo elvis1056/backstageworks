@@ -231,7 +231,7 @@ const ForgetPassword = () => {
                     classes={{ root: classes.sendButtonStyle }}
                     disabled={lock}
                     onClick={() => {
-                      history.push('/')
+                      history.push('/sign-in')
                     }}
                   />
                   <PrimaryButton

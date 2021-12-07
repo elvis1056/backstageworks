@@ -45,7 +45,7 @@ const Routes = () => {
           component={SignIn}
           exact
           layout={MinimalLayout}
-          path="/"
+          path="/sign-in"
         />
         <RouteWithLayout
           component={SignUp}

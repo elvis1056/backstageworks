@@ -66,13 +66,15 @@ const PageHeader = () => {
   }, [isNotifycationDropdownOpen])
 
   const handleLogout = async() => {
+    history.push('/sign-in')
+    const close = true;
+    if (close) return
     try {
       await deleteToken(cookies.get('token'))
       cookies.remove('user');
       cookies.remove('token');
       cookies.remove('admin');
       socketClient.deactivate()
-      history.push('/')
     } catch (_) {
       // ! do nothing
       _;

@@ -7,7 +7,7 @@ const logout = () => {
   cookies.set('token', '');
   cookies.set('user', '');
   cookies.set('admin', '');
-  location.href = '/'
+  location.href = '/sign-in';
 }
 
 axios.interceptors.response.use(
