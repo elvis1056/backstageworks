@@ -13,7 +13,8 @@ const {
   REACT_APP_PRODUCT_NAME,
   REACT_APP_PRODUCT_VERSION,
   REACT_APP_COMPANY_NAME,
-  REACT_APP_COPYRIGHT_YEAR
+  REACT_APP_COPYRIGHT_YEAR,
+  REACT_APP_BASENAME
 } = process.env;
 
 const setting = {
@@ -31,7 +32,8 @@ const setting = {
   productName: REACT_APP_PRODUCT_NAME,
   productVersion: REACT_APP_PRODUCT_VERSION,
   companyName: REACT_APP_COMPANY_NAME,
-  copyrightYear: REACT_APP_COPYRIGHT_YEAR
+  copyrightYear: REACT_APP_COPYRIGHT_YEAR,
+  basename: REACT_APP_BASENAME
 };
 
 // eslint-disable-next-line
