@@ -23,6 +23,8 @@ import { useTranslation } from 'react-i18next';
 import { isEmpty, first } from 'lodash';
 import { toast } from 'react-toastify';
 
+import { fakeGroupData } from './fakeData';
+
 const useStyles = makeStyles((theme) => ({
   ...commonStyle(theme),
   toolbar: {
@@ -96,11 +98,40 @@ const GroupManage = () => {
 
   const getMenuData = () => {
     let leaderGroups = userInfo.leaderGroups;
+
     if (userInfo.admin === 'true') {
       leaderGroups = ['system']
     }
+
+    function checkHasName(arr, name) {
+      return arr.some(item => {
+        if (item.name === name) return true;
+        if (!isEmpty(item.children)) return checkHasName(item.children, name)
+        return false
+      })
+    }
+
     if (leaderGroups) {
       setIsMenuLoading(true);
+
+      if (!isEmpty(leaderGroups)) {
+        const filterdData = fakeGroupData.filter(item => {
+          const name = item.name;
+          return !fakeGroupData.some(item2 => {
+            if (item2.name === name) return false;
+            return checkHasName(item2.children, name)
+          })
+        })
+        setMenuData(filterdData)
+        setIsMenuLoading(false)
+      } else {
+        history.push('entry')
+      }
+
+
+      const close = true;
+      if (close) return;
+
       !isEmpty(leaderGroups)
         ?
         Promise.all(

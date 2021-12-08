@@ -19,6 +19,8 @@ import GlobalContext from 'layouts/Main/GlobalContext';
 
 import style from '../scss/index.module.scss';
 
+import { fakeLeader } from './fakeData';
+
 const useStyles = makeStyles(() => ({
   marginRight10: {
     marginRight: 10
@@ -65,6 +67,10 @@ const Leader = ({ group, disabledDeleteBtnList, selectedItem }) => {
 
   const getData = () => {
     setIsLoading(true)
+    setLeaders(fakeLeader)
+    setIsLoading(false)
+    const close = true;
+    if (close) return
     getGroupLeaders(group)
       .then(data => setLeaders(data))
       .catch(err => toast.error('Error:' + err.data ? err.data.message : err.message))
@@ -72,6 +78,12 @@ const Leader = ({ group, disabledDeleteBtnList, selectedItem }) => {
   }
 
   const onDelete = () => {
+
+    toast.success(`${t('success')}`)
+
+    const close = true
+    if (close) return
+
     const formData = {
       name: group,
       leaders: leaders.filter(item => item.username !== selectedUser).map(item => item.username)
