@@ -23,6 +23,10 @@ import tabStyles from './index.module.scss';
 
 import { useCheckPrivilege } from 'utils/hooks/useCheckPrivilege';
 
+import { fakeSystemResource, fakeJobData, fakeResourceUnits } from './fakeData';
+import { fakeCpu, fakeCpuMemory, fakeGpu, fakeGpuMemory, fakeDiskIn, fakeDiskOut, fakeNetworkIn, fakeNetworkOut } from './fakePrometheus';
+import { parseNormalFormat, parseMBFormat, parseKBFormat } from '../../utils';
+
 const useStyles = makeStyles(() => ({
   marginRight10: {
     marginRight: 10
@@ -183,6 +187,28 @@ const User = () => {
   }
 
   const getPieChartData = async(topNuser) => {
+    const combineWithTotalParameter = computeTotalResourceData(fakeSystemResource, fakeResourceUnits)
+    setResourceData(combineWithTotalParameter)
+
+    const runningJob = fakeJobData.filter(job => {
+      if (isNull(job.description)) return false
+      if (job.description.virtualGroup === undefined) return false
+      if (job.state !== 'RUNNING') return false
+      return true
+    })
+
+    setJobRawData(
+      fakeJobData.filter(job => {
+        if (isNull(job.description)) return false
+        if (job.description.virtualGroup === undefined) return false
+        return true
+      })
+    )
+    setUserOverviewData(computeUserOveriewData(combineWithTotalParameter, runningJob, t, topNuser))
+
+    const close = true
+    if (close) return
+
     try {
       const resourceUnits = await getHivedResourceUnit()
       const systemResource = await getResource('system')
@@ -211,6 +237,70 @@ const User = () => {
   }
 
   const getLineChartData = async(query) => {
+
+    const fakeUseData = {
+      cpu: fakeCpu.data.result.map(item => ({
+        ...item,
+        values: item.values.map(value => value.map(parseNormalFormat))
+      })),
+      cpuMemory: fakeCpuMemory.data.result.map(item => {
+        const data = item.values.map(value => value.map(parseMBFormat))
+        return {
+          ...item,
+          values: data
+        }
+      }),
+      gpu: fakeGpu.data.result.map(item => {
+        const data = item.values.map(value => value.map(parseNormalFormat))
+        return {
+          ...item,
+          values: data
+        }
+      }),
+      gpuMemory: fakeGpuMemory.data.result.map(item => {
+        const data = item.values.map(value => value.map(parseNormalFormat))
+        return {
+          ...item,
+          values: data
+        }
+      }),
+      diskIn: fakeDiskIn.data.result.map(item => {
+        const data = item.values.map(value => value.map(parseMBFormat))
+        return {
+          ...item,
+          values: data
+        }
+      }),
+      diskOut: fakeDiskOut.data.result.map(item => {
+        const data = item.values.map(value => value.map(parseMBFormat))
+        return {
+          ...item,
+          values: data
+        }
+      }),
+      networkIn: fakeNetworkIn.data.result.map(item => {
+        const data = item.values.map(value => value.map(parseKBFormat))
+        return {
+          ...item,
+          values: data
+        }
+      }),
+      networkOut: fakeNetworkOut.data.result.map(item => {
+        const data = item.values.map(value => value.map(parseKBFormat))
+        return {
+          ...item,
+          values: data
+        }
+      })
+    }
+    const optionUsers = getUserDropdownList(fakeUseData.cpu)
+    setDropdownForUser(optionUsers)
+    const valuesCategorybyUser = getValuesCategorybyUser(fakeUseData, optionUsers)
+    setValuesCategorybyUser(valuesCategorybyUser)
+
+    const close = true;
+    if (close) return
+
     try {
       const data = await getUseData(query)
       const optionUsers = getUserDropdownList(data.cpu)
