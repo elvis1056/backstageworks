@@ -73,7 +73,7 @@ const Main = ({ children }) => {
 
     try {
       // const userInfoReq = await getCurrentUserInfo(user)
-      const userInfoReq = { 'username':'admin', 'userCode':null, 'name':null, 'email':null, 'phone':null, 'description':null, 'roles':['admin'], 'privileges':['ADMIN'], 'state':1, 'leaderGroups':['system', 'qwe'], 'userGroups':['system'], 'virtualGroups':['nick', 'nick2', 'test', 'rtx'], 'nfsList':['ass', 'xfsquota3', 'nfs2', 'qwer', 'sdsdsd', 'admin', 'elvis', 'xfsquaota', 'dododo'], 'glusterfsList':['qqqqqqq', 'glusterfs'], 'xdfsList':['xdfs', 'admin'], 'lastSigninDate':1636696393988 }
+      const userInfoReq = { 'username':'admin', 'userCode':null, 'name':null, 'email':null, 'phone':null, 'description':null, 'roles':['admin'], 'privileges':['ADMIN'], 'state':1, 'leaderGroups':['system', 'qwe', 'A2'], 'userGroups':['system'], 'virtualGroups':['nick', 'nick2', 'test', 'rtx'], 'nfsList':['ass', 'xfsquota3', 'nfs2', 'qwer', 'sdsdsd', 'admin', 'elvis', 'xfsquaota', 'dododo'], 'glusterfsList':['qqqqqqq', 'glusterfs'], 'xdfsList':['xdfs', 'admin'], 'lastSigninDate':1636696393988 }
 
       if(userInfoReq && !isEmpty(userInfoReq)){
         const thisUserInfo = {
