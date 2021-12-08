@@ -66,7 +66,7 @@ const PageHeader = () => {
   }, [isNotifycationDropdownOpen])
 
   const handleLogout = async() => {
-    history.push('/sign-in')
+    history.push('/')
     const close = true;
     if (close) return
     try {

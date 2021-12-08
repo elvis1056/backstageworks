@@ -68,7 +68,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (isUndefined(isAllowRegister)) return;
-    if (!isAllowRegister) history.push('/sign-in');
+    if (!isAllowRegister) history.push('/');
   }, [isAllowRegister])
 
   const [userInfo, setUserInfo] = useState({
@@ -195,7 +195,7 @@ const SignUp = () => {
         title: `${t('register')}${t('enSpace')}${t('success')}`,
         message: t('pleaseLoginAgain'),
         callback: () => {
-          history.push('/sign-in');
+          history.push('/');
         }
       });
     } catch (err) {
