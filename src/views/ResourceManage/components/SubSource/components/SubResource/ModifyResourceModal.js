@@ -56,6 +56,13 @@ function ModifyResourceModal({ isOpen, onClose, resourceUnits }) {
 
   const getAllGroupData = () => {
     setIsCreating(true)
+    const fakeAllGroup = ['system', 'qwe', 'qwewwww', 'A1', 'A2', 'A3', 'A1-a', 'A1-b', 'A1-b-1', 'A2-a', 'A2-b']
+    setAllGroup(fakeAllGroup)
+    setIsCreating(false)
+
+    const close = true;
+    if (close) return
+
     getGroupData()
       .then(res => {
         setAllGroup(res)
@@ -68,6 +75,12 @@ function ModifyResourceModal({ isOpen, onClose, resourceUnits }) {
   }
 
   const onSubmit = async() => {
+
+    toast.success(`${t('modify')}${t('enSpace')}${t('success')}`)
+
+    const close = true;
+    if (close) return
+
     try {
       setIsCreating(true)
       const cells = Object.values(selectedUnits)

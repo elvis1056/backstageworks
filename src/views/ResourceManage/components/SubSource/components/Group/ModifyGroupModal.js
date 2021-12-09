@@ -46,6 +46,12 @@ function ModifyGroupModal({ isOpen, onClose, resourceUnits }) {
   };
 
   const onSubmit = async() => {
+
+    toast.success(`${t('modify')}${t('enSpace')}${t('success')}`)
+
+    const close = true;
+    if (close) return
+
     try {
       setIsCreating(true)
       const cells = Object.values(selectedUnits)

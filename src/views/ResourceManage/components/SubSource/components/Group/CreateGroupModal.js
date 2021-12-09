@@ -47,6 +47,12 @@ function CreateGroupModal({ isOpen, onClose, data, resourceUnits }) {
   };
 
   const onSubmit = async() => {
+
+    toast.success(`${t('add')}${t('enSpace')}${t('success')}`)
+
+    const close = true;
+    if (close) return
+
     try {
       setIsCreating(true)
       const cells = Object.values(selectedUnits).reduce((acc, { key, number }) => {

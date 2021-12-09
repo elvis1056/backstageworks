@@ -55,6 +55,13 @@ function CreateRoleModal({ isOpen, onClose, data, resourceUnits }) {
 
   const getAllGroupData = () => {
     setIsCreating(true)
+    const fakeAllGroup = ['system', 'qwe', 'qwewwww', 'A1', 'A2', 'A3', 'A1-a', 'A1-b', 'A1-b-1', 'A2-a', 'A2-b']
+    setAllGroup(fakeAllGroup)
+    setIsCreating(false)
+
+    const close = true;
+    if (close) return
+
     getGroupData('')
       .then(res => setAllGroup(res))
       .catch(err => toast.error(err.data ? err.data.message : err.message))
@@ -62,6 +69,12 @@ function CreateRoleModal({ isOpen, onClose, data, resourceUnits }) {
   }
 
   const onSubmit = async() => {
+
+    toast.success(`${t('add')}${t('enSpace')}${t('success')}`)
+
+    const close = true;
+    if (close) return
+
     try {
       setIsCreating(true)
       const cells = Object.values(selectedUnits).reduce((acc, { key, number }) => {
