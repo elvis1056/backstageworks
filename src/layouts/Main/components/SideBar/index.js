@@ -50,14 +50,14 @@ const SideBar = ({ userInfo }) => {
           adjustIconWidth: true,
           isShow: !isXdfsEnabled
         },
-        {
-          key: 'glusterfs',
-          title: t('glusterfs'),
-          className: 'data-management--glusterfs',
-          iconName: 'fa-object-group',
-          href: '/glusterfs-item-list',
-          isShow: !isXdfsEnabled
-        },
+        // {
+        //   key: 'glusterfs',
+        //   title: t('glusterfs'),
+        //   className: 'data-management--glusterfs',
+        //   iconName: 'fa-object-group',
+        //   href: '/glusterfs-item-list',
+        //   isShow: !isXdfsEnabled
+        // },
         {
           key: 'xdfs',
           title: t('xdfs'),
@@ -91,40 +91,40 @@ const SideBar = ({ userInfo }) => {
           isShow: true
         }
       ]
-    },
-    {
-      key: 'ModelTraining',
-      id: 'model-training',
-      title: `${t('model')}${t('enSpace')}${t('training')}`,
-      iconName: 'fa-space-shuttle',
-      adjustIconWidth: true,
-      child: [
-        {
-          key: 'SubmitJob',
-          title: `${t('sideBar.job-submission')}`,
-          className: 'model-training--submit-job',
-          iconName: 'fa-plus-circle',
-          href: '/job-submit',
-          isShow: true
-        },
-        {
-          key: 'JobManage',
-          title: `${t('job')}${t('enSpace')}${t('management')}`,
-          className: 'model-management--models',
-          iconName: 'fa-tasks',
-          href: '/job-detail',
-          isShow: true
-        },
-        {
-          key: 'Schedule',
-          title: `${t('sideBar.schedule-arrangement')}`,
-          className: 'model-training--schedule',
-          iconName: 'far fa-calendar-check',
-          href: '/schedule',
-          isShow: true
-        }
-      ]
     }
+    // {
+    //   key: 'ModelTraining',
+    //   id: 'model-training',
+    //   title: `${t('model')}${t('enSpace')}${t('training')}`,
+    //   iconName: 'fa-space-shuttle',
+    //   adjustIconWidth: true,
+    //   child: [
+    //     {
+    //       key: 'SubmitJob',
+    //       title: `${t('sideBar.job-submission')}`,
+    //       className: 'model-training--submit-job',
+    //       iconName: 'fa-plus-circle',
+    //       href: '/job-submit',
+    //       isShow: true
+    //     },
+    //     {
+    //       key: 'JobManage',
+    //       title: `${t('job')}${t('enSpace')}${t('management')}`,
+    //       className: 'model-management--models',
+    //       iconName: 'fa-tasks',
+    //       href: '/job-detail',
+    //       isShow: true
+    //     },
+    //     {
+    //       key: 'Schedule',
+    //       title: `${t('sideBar.schedule-arrangement')}`,
+    //       className: 'model-training--schedule',
+    //       iconName: 'far fa-calendar-check',
+    //       href: '/schedule',
+    //       isShow: true
+    //     }
+    //   ]
+    // }
     // {
     //   key: 'ModelManage',
     //   id: 'model-management',

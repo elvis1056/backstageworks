@@ -25,7 +25,7 @@ import theme from './theme';
 initializeIcons('/assets/font/');
 loadTheme(theme);
 
-const browserHistory = createBrowserHistory({ basename: window.ENV.basename });
+const browserHistory = createBrowserHistory({ basename: process.env.PUBLIC_URL });
 
 function App() {
 

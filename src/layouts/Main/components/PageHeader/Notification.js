@@ -166,14 +166,14 @@ const Notification = ({ isNotifycationDropdownOpen, userInfo, setHasNoRead, setL
     }
   }
 
-  const handleReadAll = () => {
-    setNoticeList(prev => {
-      const copy = [...prev]
-      copy.forEach(item => item.isRead = true)
-      return copy
-    })
-    socketClient.publish({ destination: '/app/notice/readAll' })
-  }
+  // const handleReadAll = () => {
+  //   setNoticeList(prev => {
+  //     const copy = [...prev]
+  //     copy.forEach(item => item.isRead = true)
+  //     return copy
+  //   })
+  //   socketClient.publish({ destination: '/app/notice/readAll' })
+  // }
 
   const handleDelete = id => {
     setNoticeList(prev => prev.filter(item => item.id !== id))
@@ -203,7 +203,8 @@ const Notification = ({ isNotifycationDropdownOpen, userInfo, setHasNoRead, setL
             >
               <MenuItem
                 onClick={() => {
-                  handleReadAll(true)
+                  toast.success(`${t('markAllAsRead')}`)
+                  // handleReadAll(true)
                   setAnchorEl(null)
                 }}
               >

@@ -39,7 +39,8 @@ const resetSidebar = () => {
 
 const PageHeader = () => {
   const { t } = useTranslation();
-  const { userInfo, systemSettingUrl, socketClient, isXdfsEnabled, asyncIsFileExist } = useContext(GlobalContext);
+  // isXdfsEnabled
+  const { userInfo, systemSettingUrl, socketClient, asyncIsFileExist } = useContext(GlobalContext);
   const history = useHistory();
 
   const [isNotifycationDropdownOpen, setIsNotifycationDropdownOpen] = useState(false);
@@ -112,13 +113,13 @@ const PageHeader = () => {
           name: `${t('role')}${t('enSpace')}${t('management')}`,
           link: '/role-list',
           isShow: checkPrivilege(['ADMIN'])
-        },
-        {
-          icon: 'far fa-list-alt',
-          name: `${t('routeName.loginlog')}`,
-          link: '/loginlog',
-          isShow: checkPrivilege(['ADMIN'])
         }
+        // {
+        //   icon: 'far fa-list-alt',
+        //   name: `${t('routeName.loginlog')}`,
+        //   link: '/loginlog',
+        //   isShow: checkPrivilege(['ADMIN'])
+        // }
       ]
     },
     {
@@ -132,82 +133,82 @@ const PageHeader = () => {
           link: '/resource-manage',
           isShow: checkPrivilege(['ADMIN'])
         },
-        {
-          icon: 'fas fa-chart-pie',
-          name: `${t('group')}${t('enSpace')}${t('management')}`,
-          link: '/virtual-groups',
-          isShow: checkPrivilege(['VIRTUAL_CLUSTER', 'ADMIN'])
-        },
-        {
-          icon: 'far fa-hdd',
-          name: `${t('node')}${t('enSpace')}${t('management')}`,
-          link: '/cluster-view/hardware',
-          isShow: checkPrivilege(['ADMIN'])
-        },
+        // {
+        //   icon: 'fas fa-chart-pie',
+        //   name: `${t('group')}${t('enSpace')}${t('management')}`,
+        //   link: '/virtual-groups',
+        //   isShow: checkPrivilege(['VIRTUAL_CLUSTER', 'ADMIN'])
+        // },
+        // {
+        //   icon: 'far fa-hdd',
+        //   name: `${t('node')}${t('enSpace')}${t('management')}`,
+        //   link: '/cluster-view/hardware',
+        //   isShow: checkPrivilege(['ADMIN'])
+        // },
         {
           icon: 'fas fa-chart-line',
           name: `${t('report')}${t('enSpace')}${t('Analysis')}`,
           link: '/cluster-report',
           isShow: checkPrivilege(['ADMIN'])
-        },
-        {
-          icon: 'fas fa-key',
-          name: `${t('license')}${t('enSpace')}${t('management')}`,
-          link: '/license-list',
-          isShow: checkPrivilege(['ADMIN', 'KEY'])
-        }
-      ]
-    },
-    {
-      icon: 'fas fa-warehouse',
-      name: `${t('topBar.storage')}`,
-      isShow: checkPrivilege(['ADMIN', 'NFS', 'GLUSTERFS']) || isXdfsEnabled,
-      children: [
-        {
-          icon: 'fas fa-inbox',
-          name: `${t('NFS')}${t('enSpace')}${t('management')}`,
-          link: '/nfs-disk-list',
-          isShow: !isXdfsEnabled && checkPrivilege(['ADMIN', 'NFS'])
-        },
-        {
-          icon: 'fas fa-object-group',
-          name: `${t('glusterfs')}${t('enSpace')}${t('management')}`,
-          link: '/glusterfs',
-          isShow: !isXdfsEnabled && checkPrivilege(['ADMIN', 'GLUSTERFS'])
-        },
-        {
-          icon: 'fas fa-object-group',
-          name: `${t('xdfs')}${t('enSpace')}${t('management')}`,
-          link: '/xdfs',
-          isShow: isXdfsEnabled && checkPrivilege(['ADMIN', 'NFS'])
-        }
-      ]
-    },
-    {
-      icon: 'far fa-calendar-alt',
-      name: `${t('topBar.schedule-system')}`,
-      isShow: checkPrivilege(['JOB']) || hasGroup,
-      children: [
-        // {
-        //   icon: 'far fa-calendar-check',
-        //   name: `${t('schedule')}${t('enSpace')}${t('management')}`,
-        //   link: '/schedule-manage',
-        //   isShow: hasGroup
-        // },
-        {
-          icon: 'fas fa-tasks',
-          name: `${t('job')}${t('enSpace')}${t('management')}`,
-          link: '/job-detail',
-          isShow: checkPrivilege(['ADMIN', 'JOB'])
         }
         // {
-        //   icon: 'fas fa-columns',
-        //   name: `${t('template')}${t('enSpace')}${t('management')}`,
-        //   link: '/template-manage',
-        //   isShow: true
+        //   icon: 'fas fa-key',
+        //   name: `${t('license')}${t('enSpace')}${t('management')}`,
+        //   link: '/license-list',
+        //   isShow: checkPrivilege(['ADMIN', 'KEY'])
         // }
       ]
     }
+    // {
+    //   icon: 'fas fa-warehouse',
+    //   name: `${t('topBar.storage')}`,
+    //   isShow: checkPrivilege(['ADMIN', 'NFS', 'GLUSTERFS']) || isXdfsEnabled,
+    //   children: [
+    //     {
+    //       icon: 'fas fa-inbox',
+    //       name: `${t('NFS')}${t('enSpace')}${t('management')}`,
+    //       link: '/nfs-disk-list',
+    //       isShow: !isXdfsEnabled && checkPrivilege(['ADMIN', 'NFS'])
+    //     },
+    //     {
+    //       icon: 'fas fa-object-group',
+    //       name: `${t('glusterfs')}${t('enSpace')}${t('management')}`,
+    //       link: '/glusterfs',
+    //       isShow: !isXdfsEnabled && checkPrivilege(['ADMIN', 'GLUSTERFS'])
+    //     },
+    //     {
+    //       icon: 'fas fa-object-group',
+    //       name: `${t('xdfs')}${t('enSpace')}${t('management')}`,
+    //       link: '/xdfs',
+    //       isShow: isXdfsEnabled && checkPrivilege(['ADMIN', 'NFS'])
+    //     }
+    //   ]
+    // },
+    // {
+    //   icon: 'far fa-calendar-alt',
+    //   name: `${t('topBar.schedule-system')}`,
+    //   isShow: checkPrivilege(['JOB']) || hasGroup,
+    //   children: [
+    // {
+    //   icon: 'far fa-calendar-check',
+    //   name: `${t('schedule')}${t('enSpace')}${t('management')}`,
+    //   link: '/schedule-manage',
+    //   isShow: hasGroup
+    // },
+    // {
+    //   icon: 'fas fa-tasks',
+    //   name: `${t('job')}${t('enSpace')}${t('management')}`,
+    //   link: '/job-detail',
+    //   isShow: checkPrivilege(['ADMIN', 'JOB'])
+    // }
+    // {
+    //   icon: 'fas fa-columns',
+    //   name: `${t('template')}${t('enSpace')}${t('management')}`,
+    //   link: '/template-manage',
+    //   isShow: true
+    // }
+    // ]
+    // }
   ]
 
   return (
