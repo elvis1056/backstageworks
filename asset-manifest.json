@@ -51,8 +51,8 @@
     "UserManage.js": "/backstageworks/static/js/UserManage.5135ffa4.chunk.js",
     "UserManage.js.map": "/backstageworks/static/js/UserManage.5135ffa4.chunk.js.map",
     "main.css": "/backstageworks/static/css/main.ef45d397.chunk.css",
-    "main.js": "/backstageworks/static/js/main.55202ef2.chunk.js",
-    "main.js.map": "/backstageworks/static/js/main.55202ef2.chunk.js.map",
+    "main.js": "/backstageworks/static/js/main.89b4e59b.chunk.js",
+    "main.js.map": "/backstageworks/static/js/main.89b4e59b.chunk.js.map",
     "runtime-main.js": "/backstageworks/static/js/runtime-main.3adcd79b.js",
     "runtime-main.js.map": "/backstageworks/static/js/runtime-main.3adcd79b.js.map",
     "static/css/21.aff53dac.chunk.css": "/backstageworks/static/css/21.aff53dac.chunk.css",
@@ -115,6 +115,6 @@
     "static/css/21.aff53dac.chunk.css",
     "static/js/21.3b960369.chunk.js",
     "static/css/main.ef45d397.chunk.css",
-    "static/js/main.55202ef2.chunk.js"
+    "static/js/main.89b4e59b.chunk.js"
   ]
 }
