@@ -21,6 +21,24 @@ import { getTotalHostInfo, getHardwareInfoRange, getHardwareInfo } from 'utils/a
 
 import tabStyles from './index.module.scss';
 
+import {
+  fakeHostInfo,
+  fakenode_cpu_seconds_total,
+  fakenode_memory_MemTotal_bytes,
+  fakenode_memory_MemFree_bytes,
+  fakenode_memory_Buffers_bytes,
+  fakenvidiasmi_utilization_gpu,
+  fakenvidiasmi_utilization_memory,
+  fakenode_disk_read_bytes_total,
+  fakenode_disk_written_bytes_total,
+  fakenode_network_receive_bytes_total,
+  fakenode_network_transmit_bytes_total,
+  fakeconfigured_gpu_count,
+  fakenvidiasmi_utilization_gpuminor_number,
+  fakenvidiasmi_utilization_memoryminor_number
+} from './fakePrometheus';
+// fakeTotalGpuCount, fakeUnameInfo
+
 const useStyles = makeStyles(() => ({
   marginRight10: {
     marginRight: 10
@@ -47,6 +65,38 @@ const SingleNodeTab = (props) => {
 
   const getHostInfo = (activeInstance) => {
     const query = computeDayRange(cycle)
+
+    const getTotaleHost = fakeHostInfo.data.map(host => {
+      return (
+        {
+          key: getHostname(host.instance),
+          text: getHostname(host.instance)
+        }
+      )
+    })
+    setTotalHost(getTotaleHost)
+
+    if (activeInstance) {
+      getUseRate(activeInstance)
+      getTotalGpuCount(activeInstance)
+      setIsIndexPage({
+        index: true,
+        host: activeInstance
+      })
+      setActiveInstance(activeInstance)
+    } else {
+      const instance = getHostname(fakeHostInfo.data[0].instance)
+      getUseRate(instance)
+      getTotalGpuCount(instance)
+      setIsIndexPage({
+        index: true,
+        host: instance
+      })
+    }
+
+    const close = true;
+    if (close) return;
+
     getTotalHostInfo({
       'match[]': 'node_uname_info',
       ...query
@@ -87,6 +137,15 @@ const SingleNodeTab = (props) => {
 
   const getTotalGpuCount = (hostInstance) => {
     const query = computeDayRange(cycle);
+
+    const instance = (fakeconfigured_gpu_count.data.result[0] !== undefined) ? fakeconfigured_gpu_count.data.result[0].metric.instance : '';
+    const gpuCount = (fakeconfigured_gpu_count.data.result[0] !== undefined) ? fakeconfigured_gpu_count.data.result[0].value[1] : 0;
+    setGpuCount(gpuCount)
+    getTotalGpu(instance, gpuCount)
+
+    const close = true;
+    if (close) return;
+
     getHardwareInfo({
       query: `configured_gpu_count{instance=~"${hostInstance}(:[0-9]*)?$"}`,
       time: query.end
@@ -99,30 +158,57 @@ const SingleNodeTab = (props) => {
   }
 
   const getTotalGpu = async(instance, gpuCount) => {
-    const query = computeDayRange(cycle);
+    // const query = computeDayRange(cycle);
     const result = [];
     for (let i = 0; i < gpuCount; i++) {
-      let [gpu, memory, gpuName, memoryName] = await Promise.all([
-        getHardwareInfoRange({
-          query: `nvidiasmi_utilization_gpu{instance="${instance}",minor_number="${i}"}`,
-          ...query
-        }),
-        getHardwareInfoRange({
-          query: `nvidiasmi_utilization_memory{instance="${instance}",minor_number="${i}"}`,
-          ...query
-        })
-      ])
-      gpuName = `GPU Utilization ${!isEmpty(gpu.data.result) && gpu.data.result[0].metric.minor_number}`
-      memoryName = `GPU Memory Utilization ${!isEmpty(gpu.data.result) && gpu.data.result[0].metric.minor_number}`
-      gpu = !isEmpty(gpu.data.result) && gpu.data.result[0].values.map(value => value.map(parseNormalFormat))
-      memory =  !isEmpty(memory.data.result) && memory.data.result[0].values.map(value => value.map(parseNormalFormatGreaterthan0))
+
+      const gpuName = `GPU Utilization ${!isEmpty(fakenvidiasmi_utilization_gpuminor_number.data.result) && fakenvidiasmi_utilization_gpuminor_number.data.result[0].metric.minor_number}`
+      const memoryName = `GPU Memory Utilization ${!isEmpty(fakenvidiasmi_utilization_memoryminor_number.data.result) && fakenvidiasmi_utilization_memoryminor_number.data.result[0].metric.minor_number}`
+      const gpu = !isEmpty(fakenvidiasmi_utilization_gpuminor_number.data.result) && fakenvidiasmi_utilization_gpuminor_number.data.result[0].values.map(value => value.map(parseNormalFormat))
+      const memory =  !isEmpty(fakenvidiasmi_utilization_memoryminor_number.data.result) && fakenvidiasmi_utilization_memoryminor_number.data.result[0].values.map(value => value.map(parseNormalFormatGreaterthan0))
       result.push({ gpu, memory, gpuName, memoryName })
+
+      const close = true;
+      if (close) return
+
+      // let [gpu, memory, gpuName, memoryName] = await Promise.all([
+      //   getHardwareInfoRange({
+      //     query: `nvidiasmi_utilization_gpu{instance="${instance}",minor_number="${i}"}`,
+      //     ...query
+      //   }),
+      //   getHardwareInfoRange({
+      //     query: `nvidiasmi_utilization_memory{instance="${instance}",minor_number="${i}"}`,
+      //     ...query
+      //   })
+      // ])
+      // gpuName = `GPU Utilization ${!isEmpty(gpu.data.result) && gpu.data.result[0].metric.minor_number}`
+      // memoryName = `GPU Memory Utilization ${!isEmpty(gpu.data.result) && gpu.data.result[0].metric.minor_number}`
+      // gpu = !isEmpty(gpu.data.result) && gpu.data.result[0].values.map(value => value.map(parseNormalFormat))
+      // memory =  !isEmpty(memory.data.result) && memory.data.result[0].values.map(value => value.map(parseNormalFormatGreaterthan0))
+      // result.push({ gpu, memory, gpuName, memoryName })
     }
     setGpuInfo(result)
   }
 
   const getUseRate = (hostInstance) => {
     const query = computeDayRange(cycle)
+
+    const cpu = (fakenode_cpu_seconds_total.data.result[0] !== undefined) ? fakenode_cpu_seconds_total.data.result[0].values.map(value => value.map(parseNormalFormat)) : [];
+    const memoryTotal = (fakenode_memory_MemTotal_bytes.data.result[0] !== undefined) ? fakenode_memory_MemTotal_bytes.data.result[0].values.map(value => value.map(parseGBFormat)) : [];
+    const memoryUsed = (fakenode_memory_MemFree_bytes.data.result[0] !== undefined) ? fakenode_memory_MemFree_bytes.data.result[0].values.map(value => value.map(parseGBFormat)) : [];
+    const memoryBuffer = (fakenode_memory_Buffers_bytes.data.result[0] !== undefined) ? fakenode_memory_Buffers_bytes.data.result[0].values.map(value => value.map(parseGBFormat)) : [];
+    const gpu = (fakenvidiasmi_utilization_gpu.data.result[0] !== undefined) ? fakenvidiasmi_utilization_gpu.data.result[0].values.map(value => value.map(parseNormalFormat)) : [];
+    const gpuMemory = (fakenvidiasmi_utilization_memory.data.result[0] !== undefined) ? fakenvidiasmi_utilization_memory.data.result[0].values.map(value => value.map(parseNormalFormatGreaterthan0)) : [];
+    const diskRead = (fakenode_disk_read_bytes_total.data.result[0] !== undefined) ? fakenode_disk_read_bytes_total.data.result[0].values.map(value => value.map(parseKBFormat)) : [];
+    const diskWritten = (fakenode_disk_written_bytes_total.data.result[0] !== undefined) ? fakenode_disk_written_bytes_total.data.result[0].values.map(value => value.map(parseKBFormat)) : [];
+    const networkReceive = (fakenode_network_receive_bytes_total.data.result[0] !== undefined) ? fakenode_network_receive_bytes_total.data.result[0].values.map(value => value.map(parseKBFormat)) : [];
+    const networkTransmit = (fakenode_network_transmit_bytes_total.data.result[0] !== undefined) ? fakenode_network_transmit_bytes_total.data.result[0].values.map(value => value.map(parseKBFormat)) : [];
+
+    setUseRate({ fakeHostInfo, cpu, memoryTotal, memoryUsed, memoryBuffer, gpu, gpuMemory, diskRead, diskWritten, networkReceive, networkTransmit })
+
+    const close = true;
+    if (close) return;
+
     Promise.all([
       getTotalHostInfo({
         'match[]': 'node_uname_info',
@@ -218,6 +304,7 @@ const SingleNodeTab = (props) => {
             root: classes.marginRight10,
             startIcon: classes.iconClearMarginLeft
           }}
+          disabled
           onClick={() => {
             setIsIndexPage({
               index: false,
