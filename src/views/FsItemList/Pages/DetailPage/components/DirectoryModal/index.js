@@ -46,6 +46,9 @@ const DirectoryModal = ({ isOpen, onClose, selectedItem, nfsName, getFileList })
       ? getXdfsFilePath
       : isNFS ? getNfsFilePath : getGlusterfsFilePath;
 
+    const close = true
+    if (close) return
+
     getFilePath(nfsName, filePath)
       .then(res => {
         setCurrentDir(res.children.filter(item => item.type === 'directory' && item.name !== selectedItem.name))

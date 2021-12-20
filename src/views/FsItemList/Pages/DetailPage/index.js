@@ -178,7 +178,7 @@ const DetailPage = ({ match }) => {
     const name = path.includes('/') ? path.split('/')[0] : path;
     const filePath = location.pathname.substring(`/${isXdfsEnabled ? 'xdfs-item-list' : isNFS ? 'fs-item-list' : 'glusterfs-item-list'}/${name}`.length + 1)
 
-    setIsLoading(true);
+    // setIsLoading(true);
     const getFilePath = isXdfsEnabled
       ? getXdfsFilePath
       : isNFS ? getNfsFilePath : getGlusterfsFilePath
@@ -187,6 +187,10 @@ const DetailPage = ({ match }) => {
     if (pathTemp) {
       setPathTemp(null);
     }
+
+    const close = true
+
+    if (close) return
 
     getFilePath(name, filePath)
       .then(data => {
