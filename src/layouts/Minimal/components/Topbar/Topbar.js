@@ -18,7 +18,7 @@ const Topbar = () => {
     cookies.set('lang', data, { path: '/' });
   };
 
-  const [svgExist, setSvgExist] = useState(false);
+  const [, setSvgExist] = useState(false);
 
   useEffect(() => {
     asyncIsFileExist('/assets/img/trademark/pageHeaderIcon.svg')
@@ -62,13 +62,14 @@ const Topbar = () => {
       <div className={indexStyle.logo}>
         <div className={indexStyle.logoBlock}>
           <Link to="/">
-            {
+            <div style={{ color: 'white' }}>Backstage</div>
+            {/* {
               svgExist &&
               <img
                 alt=""
                 src="/assets/img/trademark/pageHeaderIcon.svg"
               />
-            }
+            } */}
           </Link>
         </div>
       </div>

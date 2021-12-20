@@ -46,7 +46,7 @@ const PageHeader = () => {
   const [isNotifycationDropdownOpen, setIsNotifycationDropdownOpen] = useState(false);
   const [hasNoRead, setHasNoRead] = useState(false);
   const [lostConnect, setLostConnect] = useState(false);
-  const [svgExist, setSvgExist] = useState(false);
+  const [, setSvgExist] = useState(false);
 
   useEffect(() => {
     asyncIsFileExist('/assets/img/trademark/pageHeaderIcon.svg')
@@ -217,29 +217,30 @@ const PageHeader = () => {
         className="logo logo-link"
         to="/entry"
       >
+        <div style={{ color: 'white' }}>Backstage</div>
         <span
           className="logo-mini"
           style={{ filter: 'invert(100%) sepia(98%) saturate(8%) hue-rotate(137deg) brightness(103%) contrast(103%)' }}
         >
-          {
+          {/* {
             svgExist &&
             <img
               className="main-logo-icon"
               src="/assets/img/trademark/pageHeaderIcon.svg"
             />
-          }
+          } */}
         </span>
         <span
           className="logo-lg"
           style={{ filter: 'invert(100%) sepia(98%) saturate(8%) hue-rotate(137deg) brightness(103%) contrast(103%)' }}
         >
-          {
+          {/* {
             svgExist &&
             <img
               className="main-logo-icon"
               src="/assets/img/trademark/pageHeaderIcon.svg"
             />
-          }
+          } */}
         </span>
       </StyledLink>
       <StyledNav
