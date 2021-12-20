@@ -111,24 +111,24 @@ function ClusterReport() {
                 value={'user'}
               />
             }
-            {
+            {/* {
               permission &&
               <Tab
                 label={`${t('Node')}`}
                 value={'singleNode'}
               />
-            }
-            <Tab
+            } */}
+            {/* <Tab
               label={`${t('job')}`}
               value={'job'}
-            />
-            {
+            /> */}
+            {/* {
               permission &&
               <Tab
                 label={t('usageTime')}
                 value={'usedTime'}
               />
-            }
+            } */}
           </Tabs>
         </Toolbar>
         <div className={`${indexStyle.wrapper} ${activeTab === 'usedTime' ? indexStyle.usedTime : ''}`}>
