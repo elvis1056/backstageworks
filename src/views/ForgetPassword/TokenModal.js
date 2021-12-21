@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -10,6 +10,7 @@ import { DefaultButton, PrimaryButton } from 'components/BaseButton';
 import { BaseTextField } from 'components/BaseMuiInput';
 
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 // import { checkChangePasswordToken } from 'utils/api';
 
 const useStyles = makeStyles(() => ({
@@ -21,14 +22,19 @@ const useStyles = makeStyles(() => ({
 const TokenModal = ({ isOpen, onClose }) => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const history = useHistory();
+  // const history = useHistory();
   const [getErrorMsg, setGetErrorMsg] = useState('');
   const [token, setToken] = useState();
   const [sendingToken, setSendingToken] = useState(false);
 
   const onSubmit = () => {
     setSendingToken(true)
-    history.push(`/changePassword?token=${token}`)
+    toast.success(`${t('token')}: ${token}`)
+    setTimeout(() => {
+      setSendingToken(false)
+      toast.success(`${t('verification')}${t('enSpace')}${t('success')} - ${token}`)
+    }, 3000)
+    // history.push(`/changePassword?token=${token}`)
     // checkChangePasswordToken(token)
     //   .then(() => {
     //     setSendingToken(false);

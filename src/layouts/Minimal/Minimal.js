@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Topbar from './components/Topbar';
 import GlobalContext from './GlobalContext';
-
+import { ToastContainer } from 'react-toastify';
 // import { getAllowRegister } from 'utils/api';
 
 import 'utils/i18n';
@@ -53,6 +53,13 @@ const Minimal = props => {
   return (
     <GlobalContext.Provider value={contextValue}>
       <Topbar />
+      <ToastContainer
+        containerId="miniToast"
+        position="top-center"
+        style={{
+          zIndex: 10000000 // bigger than modal
+        }}
+      />
       {children}
     </GlobalContext.Provider>
   );
