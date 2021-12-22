@@ -154,10 +154,9 @@ const RoleList = () => {
 
   const onDelete = useCallback(() => {
     const isDelete = true;
-    setIsLoading(true);
+    // setIsLoading(true);
     if (isDelete) {
       toast.success(`${t('delete')}${t('enSpace')}${t('success')}`);
-      setIsLoading(false)
       return
     }
     deleteRole({ name: designateUpdateUser.name })

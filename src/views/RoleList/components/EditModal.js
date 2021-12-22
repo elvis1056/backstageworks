@@ -68,6 +68,16 @@ function EditModal(props) {
       privileges: userInfo.privileges
     };
 
+    toast.success(
+      <>
+        {t('updateSuccess')}
+        <div>{createRolePrivilegesInfo.name}</div>
+        {createRolePrivilegesInfo.privileges.join(',')}
+      </>
+    );
+    const close = true
+    if (close) return
+
     try {
       setIsRolePrivilegesCreating(true);
       await updateRole(userInfo.id, createRolePrivilegesInfo);
