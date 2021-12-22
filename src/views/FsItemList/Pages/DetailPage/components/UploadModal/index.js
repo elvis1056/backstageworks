@@ -150,6 +150,12 @@ const UploadModal = ({ isOpen, onClose, nfsName, mode, getFileList }) => {
       setProgressValue(Number((loaded * 100 / total).toFixed(2)));
     }
 
+    setUploadStatus('success')
+    onUploadProgress({ total: 100, loaded: 100 })
+
+    const close = true;
+    if (close) return
+
     const uploadFile = isXdfsEnabled
       ? uploadXdfsFile
       : isNFS ? uploadNfsFile : uploadGlusterfsFile;

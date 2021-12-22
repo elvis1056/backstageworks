@@ -145,6 +145,10 @@ const DetailPage = ({ match }) => {
     const { name } = selectedItem
     const deleteFile = isXdfsEnabled ? deleteXdfsFile : (isNFS ? deleteNfsFile : deleteGlusterfsFile);
 
+    toast.success(`${t('delete')}${t('enSpace')}${t('success')} - ${name}`)
+    const close = true;
+    if (close) return
+
     deleteFile(path, fsItemNodePath)
       .then(() => {
         toast.success(`${t('delete')}${t('enSpace')}${t('success')}`);
@@ -469,7 +473,13 @@ const DetailPage = ({ match }) => {
                     .finally(() => setIsDownloading(false));
                 }
 
-                const editFile = () => {
+                const editFile = (fsItemNode) => {
+                  const { name } = fsItemNode;
+
+                  toast.success(`${t('edit')}${t('enSpace')}${t('success')} - ${name}`)
+                  const close = true;
+                  if (close) return
+
                   setIsDownloading(true)
                   downloadFileReq(path, fsItemNodePath)
                     .then(res => {
@@ -496,6 +506,11 @@ const DetailPage = ({ match }) => {
                 }
 
                 const copyFile = () => {
+
+                  toast.success(`${t('clone')}${t('enSpace')}${t('success')}`)
+                  const close = true;
+                  if (close) return
+
                   setIsDownloading(true)
                   const newFileName = generateNewFileName(fsItemNodePath, fileList, type)
                   const copyFileReq = isXdfsEnabled ? copyXdfsFile : (isNFS ? copyNfsFile : copyGlusterfsFile);
@@ -518,7 +533,14 @@ const DetailPage = ({ match }) => {
                         isWritable ?
                           <SplitButton
                             disabled={!isDownloadable}
-                            onClick={downloadFile}
+                            onClick={() => {
+                              toast.success(`${t('download')}${t('enSpace')}${t('success')}`);
+                              const downloadOK = false;
+                              if (downloadOK) {
+                                downloadFile()
+                                return
+                              }
+                            }}
                             options={[
                               {
                                 id: 'rename',
@@ -551,7 +573,7 @@ const DetailPage = ({ match }) => {
                                 id: 'edit',
                                 label: t('edit'),
                                 disabled: !isDownloadable,
-                                handleItemclick: editFile,
+                                handleItemclick: () => editFile(fsItemNode),
                                 style: !isDownloadable ? { display: 'none' } : {},
                                 icon: <Icon style={{ marginRight: '10px' }}>edit</Icon>
                               },

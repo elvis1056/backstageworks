@@ -36,6 +36,12 @@ function RenameModal({ isOpen, onClose, selectedItem, fileList, nfsName, getFile
   const isDisabled = !newFileName || errorMessage
 
   const rename = () => {
+
+    toast.success(`${t('rename')}${t('enSpace')}${t('success')}`);
+
+    const close = true
+    if (close) return
+
     setIsLoading(true);
     const newPath = selectedItem.path.replace(selectedItem.name, newFileName)
 

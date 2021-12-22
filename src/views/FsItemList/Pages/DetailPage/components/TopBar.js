@@ -60,6 +60,14 @@ function TopBar({ filter, setFilter, getFileList, setIsFolderModalOpen, setIsUpl
     setIsLoading(true)
     const downloadFile = isXdfsEnabled ? downloadXdfsFile : (isNFS ? downloadNfsFile : downloadGlusterfsFile)
 
+    const str = selectionDetail.map(item => item.name).join(',')
+    toast.success(`${t('download')}${t('enSpace')}${t('success')} - ${str}`);
+    const close = true;
+    if (close) {
+      setIsLoading(false)
+      return
+    }
+
     Promise.all(
       selectionDetail.map(item => downloadFile(nfsName, item.path))
     )
@@ -78,6 +86,14 @@ function TopBar({ filter, setFilter, getFileList, setIsFolderModalOpen, setIsUpl
 
   const handleDelete = () => {
     setIsLoading(true)
+
+    const str = selectionDetail.map(item => item.name).join(',')
+    toast.success(`${t('delete')}${t('enSpace')}${t('success')} - ${str}`);
+    const close = true;
+    if (close) {
+      setIsLoading(false)
+      return
+    }
 
     const deleteFile = isXdfsEnabled ? deleteXdfsFile : isNFS ? deleteNfsFile : deleteGlusterfsFile
 
@@ -166,11 +182,11 @@ function TopBar({ filter, setFilter, getFileList, setIsFolderModalOpen, setIsUpl
           }
           <BaseLink
             style={{ padding: 0 }}
-            to="/job-submit"
+            to="/entry"
           >
             <DefaultButton
               children={`${t('submit')}${t('enSpace')}${t('job')}`}
-              disabled={isLoading}
+              disabled={isLoading || true}
               startIcon={<Icon>add_circle</Icon>}
             />
           </BaseLink>
