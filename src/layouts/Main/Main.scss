@@ -95,6 +95,9 @@
             }
           }
         }
+        .dropdown:last-child > .dropdown-menu {
+          left: auto;
+        }
       }
     }
   }
@@ -226,10 +229,16 @@
   }
   .navbar-custom-menu>.navbar-nav>li>.dropdown-menu {
     position: absolute;
-    right: 5%;
+    right: auto;
     left: auto;
     border: 1px solid #ddd;
     background: #fff;
+  }
+  .navbar-custom-menu > .navbar-nav > li:nth-last-child(-n+2) .dropdown-menu {
+    right: 0
+  }
+  .navbar-custom-menu > .navbar-nav > li:nth-last-child(4) .dropdown-menu {
+    right: 0
   }
 }
 
@@ -253,6 +262,17 @@
     .content-wrapper {
       margin-left: 0;
       padding-left: 60px;
+    }
+  }
+  .navbar {
+    .navbar-custom-menu {
+      .navbar-nav {
+        .dropdown:nth-last-child(-n+2) {
+          .dropdown-menu {
+            right: 0
+          }
+        }
+      }
     }
   }
 }
