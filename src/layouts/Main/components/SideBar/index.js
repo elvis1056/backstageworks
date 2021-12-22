@@ -80,7 +80,7 @@ const SideBar = ({ userInfo }) => {
           className: 'devlop-environment--repository',
           iconName: 'fa-cubes',
           href: '/repository',
-          isShow: true
+          isShow: false
         },
         {
           key: 'TemplateManage',
