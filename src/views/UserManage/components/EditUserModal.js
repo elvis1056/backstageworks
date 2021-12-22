@@ -292,6 +292,25 @@ function EditUserModal({ isOpen, onClose, userInfo: defaultUserInfo }) {
         // add virtualGroups
         updateUserInfo.virtualGroups = userInfo.virtualGroups;
       }
+
+      toast.success(
+        <>
+          {t('create')}{t('enSpace')}{t('success')}
+          <div>{t('Username')}: {updateUserInfo.username}</div>
+          <div>{t('Password')}: {updateUserInfo.password}</div>
+          <div>{t('confirmPassword')}: {updateUserInfo.password}</div>
+          <div>{`${t('jobNumber')}/${t('studentNumber')}`}: {updateUserInfo.userCode}</div>
+          <div>{t('fullName')}: {updateUserInfo.name}</div>
+          <div>{t('mobileNumber')}: {updateUserInfo.phone}</div>
+          <div>{t('email')}: {updateUserInfo.email}</div>
+          <div>{t('role')}: {updateUserInfo.roles.join(',')}</div>
+          <div>{t('virtualCluster')}: {updateUserInfo.virtualGroups.join(',')}</div>
+          <div>{t('note')}: {updateUserInfo.description}</div>
+        </>
+      );
+      const close = true;
+      if (close) return
+
       try {
         setIsUserEditing(true);
         await updateUser(updateUserInfo);

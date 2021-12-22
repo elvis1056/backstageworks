@@ -313,6 +313,23 @@ function CreateUserModal({ isOpen, onClose, setUserCreatSucName, setIsUserCreatS
       createUserInfo.virtualGroups = userInfo.virtualGroups;
     }
 
+    toast.success(
+      <>
+        {t('create')}{t('enSpace')}{t('success')}
+        <div>{t('Username')}: {createUserInfo.username}</div>
+        <div>{t('Password')}: {createUserInfo.password}</div>
+        <div>{t('confirmPassword')}: {createUserInfo.password}</div>
+        <div>{`${t('jobNumber')}/${t('studentNumber')}`}: {createUserInfo.userCode}</div>
+        <div>{t('fullName')}: {createUserInfo.name}</div>
+        <div>{t('mobileNumber')}: {createUserInfo.phone}</div>
+        <div>{t('email')}: {createUserInfo.email}</div>
+        <div>{t('role')}: {createUserInfo.roles.join(',')}</div>
+        <div>{t('note')}: {createUserInfo.description}</div>
+      </>
+    );
+    const close = true;
+    if (close) return
+
     try {
       setIsUserCreating(true);
       await createUser(createUserInfo);

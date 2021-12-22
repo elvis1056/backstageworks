@@ -113,6 +113,14 @@ function Table() {
 
   const onDelete = useCallback(() => {
     setIsDeleting(true);
+
+    toast.success(`${t('delete')}${t('enSpace')}${t('success')} - ${clickedUser.username}`);
+    const close = true;
+    if (close) {
+      setIsDeleting(false);
+      return
+    }
+
     deleteUser(clickedUser.username)
       .then(() => {
         getUserInfoList();
