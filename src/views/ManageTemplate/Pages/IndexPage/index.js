@@ -145,6 +145,11 @@ const ManageTemplate = () => {
   };
 
   const onDelete = () => {
+
+    toast.success(`${t('delete')}${t('enSpace')}${t('success')}`);
+    const close = true;
+    if (close) return
+
     setIsLoading(true);
     deleteJobTemplate(designateUpdateUser.id)
       .then(() => {

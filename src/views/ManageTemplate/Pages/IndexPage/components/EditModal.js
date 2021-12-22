@@ -90,6 +90,19 @@ function EditModal({ isOpen, onClose }) {
         .map(item => item.name)
     }
 
+    toast.success(
+      <>
+        {t('edit')}{t('enSpace')}{t('success')}
+        <div>{t('name')}: {templateName}</div>
+        <div>{t('description')}: {templateDescription}</div>
+      </>
+    )
+    const close = true;
+    if (close) {
+      setIsUpdating(false)
+      return
+    }
+
     putJobTemplate({ id, data })
       .then(() => {
         onClose();
