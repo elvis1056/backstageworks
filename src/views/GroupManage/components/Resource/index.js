@@ -15,6 +15,8 @@ import { formatBytes } from 'utils';
 import { MB } from 'constant';
 import { getResource, unbindResourceFromGroup, getHivedResourceUnit } from 'utils/api';
 
+import { fakeList, fakeResourceUnits } from './fakeData';
+
 import style from '../scss/index.module.scss';
 
 import PropTypes from 'prop-types';
@@ -75,6 +77,52 @@ const Resource = ({ group }) => {
   }
 
   const getResourceData = () => {
+
+    const fakeData = fakeList.map((vgInfo) => {
+      const { cells, usedCells } = vgInfo;
+      const perTotalResource = []
+      const perUsedResource = []
+      // caculate pre resource and pre unit
+      for (const key in cells) {
+        const { resourceUnit: unit, number } = cells[key];
+        perTotalResource.push({
+          cpu: fakeResourceUnits[unit].cpu * number,
+          memory: fakeResourceUnits[unit].memory * number,
+          gpu: fakeResourceUnits[unit].gpu === null ? 0 : fakeResourceUnits[unit].gpu * number
+        })
+        if (usedCells[key] !== undefined) {
+          perUsedResource.push({
+            cpuUsed: fakeResourceUnits[unit].cpu * usedCells[key],
+            memoryUsed: fakeResourceUnits[unit].memory * usedCells[key],
+            gpuUsed: fakeResourceUnits[unit].gpu === null ? 0 : fakeResourceUnits[unit].gpu * usedCells[key]
+          })
+        }
+      }
+
+      const totalResource = perTotalResource.reduce((acc, cur) => {
+        return {
+          cpu: acc.cpu + cur.cpu,
+          memory: acc.memory + cur.memory,
+          gpu: acc.gpu + (cur.gpu === null ? 0 : cur.gpu)
+        }
+      }, { cpu: 0, memory: 0, gpu: 0 })
+
+      const usedResource = perUsedResource.reduce((acc, cur) => {
+        return {
+          cpuUsed: acc.cpuUsed + cur.cpuUsed,
+          memoryUsed: acc.memoryUsed + cur.memoryUsed,
+          gpuUsed: acc.gpuUsed + cur.gpuUsed
+        }
+      }, { cpuUsed: 0, memoryUsed: 0, gpuUsed: 0 })
+
+      return { ...vgInfo, totalResource, usedResource }
+    })
+
+    setResourceData(fakeData)
+
+    const close = true
+    if (close) return
+
     if (isEmpty(group.resources)) {
       setResourceData([]);
       return;
