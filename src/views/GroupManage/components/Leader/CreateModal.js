@@ -124,6 +124,11 @@ const CreateModal = ({ isOpen, onClose, groupName, leaders, getData }) => {
                   return arr.indexOf(element) === index;
                 })
             }
+
+            toast.success(`${t('create')}${t('enSpace')}${t('success')}`);
+            const close = true
+            if (close) return
+
             setIsLoading(true)
             updateGroup(data)
               .then(() => {
