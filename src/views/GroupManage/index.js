@@ -207,10 +207,10 @@ const GroupManage = () => {
                   label={`${t('TeamLeader')}`}
                   value={'leader'}
                 />
-                <Tab
+                {/* <Tab
                   label={`${t('TeamMember')}`}
                   value={'member'}
-                />
+                /> */}
                 <Tab
                   label={`${t('resourceList')}`}
                   value={'resource'}
