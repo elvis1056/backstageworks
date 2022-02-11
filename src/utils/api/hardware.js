@@ -51,9 +51,3 @@ export const rebootNode = data => {
     data
   })
 }
-
-export const getNodeState = () => {
-  return request({
-    url: '/kubernetes/nodes'
-  })
-}
